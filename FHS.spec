@@ -1,11 +1,11 @@
-Summary:	Basic FHS 2.2 filesystem layout
+Summary:	Basic FHS 2.3 filesystem layout
 Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
-Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
+Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
-Version:	2.2
-Release:	17
+Version:	2.3
+Release:	0.1
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -24,22 +24,22 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This package contains the basic directory layout for a Linux system,
 including the proper permissions for the directories. This layout
-conforms to the Filesystem Hierarchy Standard (FHS) 2.2.
+conforms to the Filesystem Hierarchy Standard (FHS) 2.3.
 
 %description -l de
 Dieses Paket enthält die grundlegende Verzeichnisstruktur eines
 Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
-Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.2.
+Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.3.
 
 %description -l fr
 Ce package contient l'arborescence type pour système Linux y compris
 les permissions adéquates pour les répertoires. Cette arborescence est
-conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.2.
+conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.3.
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów
 systemu i praw dostêpu do nich. Struktura katalogów jest zgodna z FHS
-2.2.
+2.3.
 
 %description -l tr
 Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak
@@ -50,10 +50,10 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys,selinux} \
+install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/users,opt,selinux,srv,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
-	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
+	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
@@ -114,8 +114,10 @@ fi
 %attr(751,root,root) %dir /etc/security
 %dir /home
 /home/users
-%attr(751,root,root) /home/services
 /lib
+%attr(775,root,disk) %dir /media
+%attr(775,root,disk) /media/floppy
+%attr(775,root,disk) /media/cdrom
 /mnt
 /opt
 %attr(555,root,proc) %verify(not group) /proc
@@ -123,6 +125,7 @@ fi
 %dir /sbin
 %dir /sys
 %dir /selinux
+%attr(751,root,root) /srv
 %attr(1777,root,root) /tmp
 %dir %{_prefix}
 %{_prefix}/bin
