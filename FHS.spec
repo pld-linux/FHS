@@ -73,9 +73,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
 	done
 done
-install -d $RPM_BUILD_ROOT%{_mandir}/man
-install -d $RPM_BUILD_ROOT%{_xmandir}/man
-
+install -d $RPM_BUILD_ROOT%{_mandir}/man{n,l}
 
 %clean
 cd $RPM_BUILD_ROOT
