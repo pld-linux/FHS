@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -19,7 +19,10 @@ Obsoletes:	filesystem
 
 %define		_locmandir	/usr/local/man
 %define		_xmandir	/usr/X11R6/man
+# directory for "privilege separation" chroot
 %define		_privsepdir	/usr/share/empty
+# directory for *.idl files (for CORBA implementations)
+%define		_idldir		/usr/share/idl
 
 %description
 This package contains the basic directory layout for a Linux system,
@@ -60,9 +63,10 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt} \
 	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
-	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
+	$RPM_BUILD_ROOT%{_idldir} \
 	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
-	$RPM_BUILD_ROOT%{_privsepdir}
+	$RPM_BUILD_ROOT%{_privsepdir} \
+	$RPM_BUILD_ROOT/usr/X11R6/share
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -126,6 +130,7 @@ fi
 %{_datadir}/doc
 %{_privsepdir}
 %{_fontsdir}
+%{_idldir}
 %{_datadir}/games
 %{_datadir}/info
 %dir %{_mandir}
@@ -179,7 +184,6 @@ fi
 %lang(pl) %{_xmandir}/pl
 %lang(sk) %{_xmandir}/sk
 %dir /usr/X11R6/share
-/usr/X11R6/share/idl
 
 %dir /var
 /var/cache
