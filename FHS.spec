@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	7
+Release:	8
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -59,7 +59,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,home/users,opt} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT%{_applnkdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
-	$RPM_BUILD_ROOT%{_fontsdir}/{Type1/{afm,pfm},latin2}
+	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
