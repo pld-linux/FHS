@@ -4,8 +4,8 @@ Summary(fr):	Arborescence de base du système de fichiers
 Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
-Version:	2.1
-Release:	26
+Version:	2.2
+Release:	1
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -24,22 +24,22 @@ Obsoletes:	filesystem
 %description
 This package contains the basic directory layout for a Linux system,
 including the proper permissions for the directories. This layout
-conforms to the Filesystem Hierarchy Standard (FHS) 2.1.
+conforms to the Filesystem Hierarchy Standard (FHS) 2.2.
 
 %description -l de
 Dieses Paket enthält die grundlegende Verzeichnisstruktur eines
 Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
-Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.1.
+Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.2.
 
 %description -l fr
 Ce package contient l'arborescence type pour système Linux y compris
 les permissions adéquates pour les répertoires. Cette arborescence est
-conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.1.
+conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.2.
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów
 systemu i praw dostêpu do nich. Struktura katalogów jest zgodna z FHS
-2.1.
+2.2.
 
 %description -l tr
 Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak
