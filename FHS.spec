@@ -170,7 +170,10 @@ fi
 %lang(ru) %{_mandir}/ru
 %lang(sl) %{_mandir}/sl
 %lang(sk) %{_mandir}/sk
+%lang(sr) %{_mandir}/sr
 %lang(sv) %{_mandir}/sv
+%lang(zh_CN) %{_mandir}/zh_CN
+%lang(zh_TW) %{_mandir}/zh_TW
 %{_datadir}/misc
 %{_datadir}/tmac
 %{_prefix}/src
