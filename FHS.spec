@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	23
+Release:	24
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -19,6 +19,7 @@ Obsoletes:	filesystem
 
 %define		_locmandir	/usr/local/man
 %define		_xmandir	/usr/X11R6/man
+%define		_privsepdir	/usr/share/empty
 
 %description
 This package contains the basic directory layout for a Linux system,
@@ -60,7 +61,8 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,opt,tmp} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
-	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm}
+	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
+	$RPM_BUILD_ROOT%{_privsepdir}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -121,6 +123,7 @@ fi
 %dir %{_prefix}/share
 %{_datadir}/dict
 %{_datadir}/doc
+%{_privsepdir}
 %{_fontsdir}
 %{_datadir}/games
 %{_datadir}/info
