@@ -9,6 +9,7 @@ Release:	10
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
+URL:		http://www.pathname.com/fhs/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Prereq:		setup
 Buildarch:	noarch
