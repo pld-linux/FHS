@@ -71,7 +71,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys,selin
 install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
 %endif
 
-for manp in man{1,2,3,4,5,6,7,8,9} ; do
+for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
