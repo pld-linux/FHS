@@ -73,7 +73,9 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
 	done
 done
-install -d $RPM_BUILD_ROOT%{_mandir}/mann
+install -d $RPM_BUILD_ROOT%{_mandir}/man
+install -d $RPM_BUILD_ROOT%{_xmandir}/man
+
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -164,6 +166,10 @@ fi
 %dir %{_xmandir}
 %{_xmandir}/man*
 %lang(fr) %{_xmandir}/fr
+%lang(it) %{_xmandir}/it
+%lang(ja) %{_xmandir}/ja
+%lang(ko) %{_xmandir}/ko
+%lang(pl) %{_xmandir}/pl
 %dir /usr/X11R6/share
 /usr/X11R6/share/idl
 
