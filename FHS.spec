@@ -9,7 +9,7 @@ Release:	0.1
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Prereq:		setup
 Buildarch:	noarch
 Provides:	filesystem
