@@ -34,7 +34,7 @@ Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.3.
 %description -l fr
 Ce package contient l'arborescence type pour système Linux y compris
 les permissions adéquates pour les répertoires. Cette arborescence est
-conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.3.
+conforme au standard "Filesystem Hierarchy Standard" (FHS) 2.3.
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów
