@@ -105,7 +105,7 @@ fi
 /lib
 /mnt
 /opt
-%attr(555,root,root) /proc
+%attr(555,root,proc) /proc
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
