@@ -14,8 +14,10 @@ Group(pl):	Podstawowe
 Group(pt_BR):	Base
 URL:		http://www.pathname.com/fhs/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Prereq:		setup
-Buildarch:	noarch
+BuildRequires:	grep
+BuildRequires:	textutils
+PreReq:		setup
+BuildArch:	noarch
 Provides:	filesystem
 Obsoletes:	filesystem
 
@@ -89,7 +91,7 @@ find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
 if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - ; then
 	rm -rf $RPM_BUILD_ROOT
 else
-	echo -e "\nNot so good, some directories not included in package\n"
+	echo -e "\nNot so good, some directories are not included in package\n"
 	exit 1;
 fi
 
