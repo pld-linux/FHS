@@ -5,14 +5,13 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	14
+Release:	15
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
 PreReq:		setup
 Provides:	filesystem
 Obsoletes:	filesystem
-BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
@@ -53,12 +52,12 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
-	$RPM_BUILD_ROOT/{lib/{modules,security},lib64} \
+	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib{,64},sbin,share,src/examples} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib{,64},sbin,share/{doc,info},src} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
 	$RPM_BUILD_ROOT%{_idldir} \
@@ -67,6 +66,10 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_fontsdir}/misc \
 	$RPM_BUILD_ROOT%{_privsepdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share
+
+%ifarch ppc64 sparc64 x86_64
+install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
+%endif
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -87,7 +90,7 @@ cd $RPM_BUILD_ROOT
 
 # %{_rpmfilename} is not expanded, so use
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
-RPMFILE=%{name}-%{version}-%{release}.%{buildarch}.rpm
+RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
 TMPFILE=%{name}-%{version}.tmp$$
 find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
 
@@ -113,7 +116,6 @@ fi
 /home/users
 %attr(751,root,root) /home/services
 /lib
-/lib64
 /mnt
 /opt
 %attr(555,root,proc) %verify(not group) /proc
@@ -126,7 +128,6 @@ fi
 %{_prefix}/games
 %{_prefix}/include
 %{_prefix}/lib
-%{_prefix}/lib64
 %{_prefix}/sbin
 %dir %{_prefix}/share
 %{_datadir}/applications
@@ -171,7 +172,6 @@ fi
 %{_prefix}/local/games
 %{_prefix}/local/include
 %{_prefix}/local/lib
-%{_prefix}/local/lib64
 %{_prefix}/local/sbin
 %dir %{_prefix}/local/share
 %{_prefix}/local/share/doc
@@ -208,3 +208,9 @@ fi
 %dir /var/run
 %dir /var/spool
 %attr(1777,root,root) %dir /var/tmp
+
+%ifarch ppc64 sparc64 x86_64
+/lib64
+%{_prefix}/lib64
+%{_prefix}/local/lib64
+%endif
