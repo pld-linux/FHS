@@ -1,7 +1,7 @@
 Summary:	Basic FHS 2.1 filesystem layout
 Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
-Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
+Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
@@ -33,7 +33,7 @@ Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
 Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.1.
 
 %description -l fr
-Ce package contient l'arborescence type pour système linux y compris
+Ce package contient l'arborescence type pour système Linux y compris
 les permissions adéquates pour les répertoires. Cette arborescence est
 conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.1.
 
