@@ -4,7 +4,7 @@ Summary(fr):	Arborescence de base du système de fichiers
 Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.0
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
-Version:	1.0
+Version:	1.1
 Release:	1
 License:	GPL
 Group:		Base
@@ -52,7 +52,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,tmac} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
-	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
+	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
 
@@ -79,7 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 %dir /var
 %dir /var/db
-%dir /var/account
 %dir /var/games
 /var/lock
 %attr(751,root,root) /var/log
