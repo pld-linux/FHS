@@ -1,0 +1,2 @@
+- removed /etc/profile.d from package contents, it's in setup,
+- release 9.
