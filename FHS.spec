@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	5
+Release:	6
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -57,7 +57,9 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,lib/misc,tmp,db,opt,crash,cache} \
 	$RPM_BUILD_ROOT/var/cache \
-	$RPM_BUILD_ROOT%{_applnkdir}
+	$RPM_BUILD_ROOT%{_applnkdir} \
+	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
+	$RPM_BUILD_ROOT%{_fontsdir}/{Type1,latin2}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -88,7 +90,7 @@ else
 fi
 
 %files
-%defattr(755,root,root,755)
+%defattr(644,root,root,755)
 /bin
 %attr(755,root,root) /boot
 %dir %{_sysconfdir}
@@ -153,6 +155,8 @@ fi
 %lang(fr) %{_xmandir}/fr
 %dir /usr/X11R6/share
 %{_applnkdir}
+/usr/X11R6/share/idl
+%{_fontsdir}
 
 %dir /var
 /var/cache
