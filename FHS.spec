@@ -9,13 +9,13 @@ Release:	10
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	grep
 BuildRequires:	textutils
 PreReq:		setup
-BuildArch:	noarch
 Provides:	filesystem
 Obsoletes:	filesystem
+BuildArch:	noarch
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
 %define		_xmandir	/usr/X11R6/man
