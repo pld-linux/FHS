@@ -51,7 +51,7 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,selinux,srv,sys} \
-	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,certs,opt,security} \
 	$RPM_BUILD_ROOT{/lib/modules,/%{_lib}/security} \
 	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
@@ -115,6 +115,7 @@ fi
 /dev
 %dir /etc
 %dir %{_sysconfdir}/X11
+%attr(751,root,root) %dir /etc/certs
 %dir %{_sysconfdir}/opt
 %attr(751,root,root) %dir /etc/security
 %dir /home
