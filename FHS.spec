@@ -115,7 +115,7 @@ fi
 %attr(751,root,root) %dir /etc/security
 %dir /home
 /home/users
-%attr(751,root,root) /home/services
+%attr(751,root,services) /home/services
 /lib
 %attr(775,root,disk) %dir /media
 %attr(775,root,disk) /media/floppy
