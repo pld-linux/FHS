@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	17
+Release:	18
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -17,7 +17,7 @@ BuildArch:	noarch
 Provides:	filesystem
 Obsoletes:	filesystem
 
-%define		_locmandir	/usr/local/share/man
+%define		_locmandir	/usr/local/man
 %define		_xmandir	/usr/X11R6/man
 
 %description
