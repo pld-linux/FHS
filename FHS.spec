@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	24
+Release:	25
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -71,7 +71,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	for mloc in bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sk sv ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
 	done
-	for mloc in da fi fr hu it ja ko pl ; do
+	for mloc in da fi fr hu it ja ko pl sk ; do
 		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
 	done
 done
@@ -129,27 +129,27 @@ fi
 %{_datadir}/info
 %dir %{_mandir}
 %dir %{_mandir}/man*
-%lang(bg) %ghost %{_mandir}/bg
-%lang(cs) %ghost %{_mandir}/cs
-%lang(da) %ghost %{_mandir}/da
-%lang(de) %ghost %{_mandir}/de
-%lang(es) %ghost %{_mandir}/es
-%lang(fi) %ghost %{_mandir}/fi
-%lang(fr) %ghost %{_mandir}/fr
-%lang(hr) %ghost %{_mandir}/hr
-%lang(hu) %ghost %{_mandir}/hu
-%lang(id) %ghost %{_mandir}/id
-%lang(it) %ghost %{_mandir}/it
-%lang(ja) %ghost %{_mandir}/ja
-%lang(ko) %ghost %{_mandir}/ko
-%lang(nl) %ghost %{_mandir}/nl
-%lang(pl) %ghost %{_mandir}/pl
-%lang(pt) %ghost %{_mandir}/pt
-%lang(pt_BR) %ghost %{_mandir}/pt_BR
-%lang(ru) %ghost %{_mandir}/ru
-%lang(sl) %ghost %{_mandir}/sl
-%lang(sk) %ghost %{_mandir}/sk
-%lang(sv) %ghost %{_mandir}/sv
+%lang(bg) %{_mandir}/bg
+%lang(cs) %{_mandir}/cs
+%lang(da) %{_mandir}/da
+%lang(de) %{_mandir}/de
+%lang(es) %{_mandir}/es
+%lang(fi) %{_mandir}/fi
+%lang(fr) %{_mandir}/fr
+%lang(hr) %{_mandir}/hr
+%lang(hu) %{_mandir}/hu
+%lang(id) %{_mandir}/id
+%lang(it) %{_mandir}/it
+%lang(ja) %{_mandir}/ja
+%lang(ko) %{_mandir}/ko
+%lang(nl) %{_mandir}/nl
+%lang(pl) %{_mandir}/pl
+%lang(pt) %{_mandir}/pt
+%lang(pt_BR) %{_mandir}/pt_BR
+%lang(ru) %{_mandir}/ru
+%lang(sl) %{_mandir}/sl
+%lang(sk) %{_mandir}/sk
+%lang(sv) %{_mandir}/sv
 %{_datadir}/misc
 %{_datadir}/tmac
 %{_prefix}/src
@@ -166,14 +166,15 @@ fi
 %dir /usr/X11R6
 %dir %{_xmandir}
 %{_xmandir}/man*
-%lang(da) %ghost %{_xmandir}/da
-%lang(fi) %ghost %{_xmandir}/fi
-%lang(fr) %ghost %{_xmandir}/fr
-%lang(hu) %ghost %{_xmandir}/hu
-%lang(it) %ghost %{_xmandir}/it
-%lang(ja) %ghost %{_xmandir}/ja
-%lang(ko) %ghost %{_xmandir}/ko
-%lang(pl) %ghost %{_xmandir}/pl
+%lang(da) %{_xmandir}/da
+%lang(fi) %{_xmandir}/fi
+%lang(fr) %{_xmandir}/fr
+%lang(hu) %{_xmandir}/hu
+%lang(it) %{_xmandir}/it
+%lang(ja) %{_xmandir}/ja
+%lang(ko) %{_xmandir}/ko
+%lang(pl) %{_xmandir}/pl
+%lang(sk) %{_xmandir}/sk
 %dir /usr/X11R6/share
 /usr/X11R6/share/idl
 
