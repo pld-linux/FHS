@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -50,7 +50,7 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
+install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys,selinux} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
@@ -122,6 +122,7 @@ fi
 %attr(700,root,root) /root
 %dir /sbin
 %dir /sys
+%dir /selinux
 %attr(1777,root,root) /tmp
 %dir %{_prefix}
 %{_prefix}/bin
