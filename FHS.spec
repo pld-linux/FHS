@@ -66,6 +66,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_idldir} \
 	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
 	$RPM_BUILD_ROOT%{_fontsdir}/TTF \
+	$RPM_BUILD_ROOT%{_fontsdir}/misc \
 	$RPM_BUILD_ROOT%{_privsepdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share
 
