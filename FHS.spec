@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.0
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	1.0
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -64,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 /bin
 %attr(700,root,root) /boot
 %dir /etc
-%attr(750,root,root) %dir /etc/security
+%attr(751,root,root) %dir /etc/security
 %dir /etc/profile.d
 %dir /etc/opt
 %dir /etc/X11
