@@ -1,7 +1,7 @@
-Summary:	Basic FHS 2.1 filesystem layout
+Summary:	Basic FHS 2.2 filesystem layout
 Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
-Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
+Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
