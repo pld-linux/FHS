@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	8
+Release:	9
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -48,7 +48,7 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,dev,home/users,opt} \
-	$RPM_BUILD_ROOT/etc/{X11,profile.d,security,opt} \
+	$RPM_BUILD_ROOT/etc/{X11,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,src,games,lib,include,sbin,share} \
@@ -97,7 +97,6 @@ fi
 /dev
 %dir %{_sysconfdir}
 %attr(751,root,root) %dir /etc/security
-%dir %{_sysconfdir}/profile.d
 %dir %{_sysconfdir}/opt
 %dir %{_sysconfdir}/X11
 /home
