@@ -70,7 +70,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
 	done
 	for mloc in fr it ja ko pl ; do
-		install -d $RPM_BUILD_ROOT%{_xmandir}/%{mloc}/${manp}
+		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
 	done
 done
 install -d $RPM_BUILD_ROOT%{_mandir}/mann
