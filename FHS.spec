@@ -33,7 +33,7 @@ arborescence est conforme au standard \"Filesystem Hierarchy Standard\"
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów systemu i
-praw dostêpu do nich. Struktóra katalogów jest zgodna z FHS 2.0.
+praw dostêpu do nich. Struktura katalogów jest zgodna z FHS 2.0.
  
 %description -l tr
 Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak ayrýþtýrýlabilen
