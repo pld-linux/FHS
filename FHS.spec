@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -100,7 +100,7 @@ fi
 /lib
 /mnt
 /opt
-%attr(555,root,root) /proc
+%attr(555,root,proc) /proc
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
