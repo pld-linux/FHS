@@ -91,7 +91,7 @@ if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - ; t
 	rm -rf $RPM_BUILD_ROOT
 else
 	echo -e "\nNot so good, some directories not included in package\n"
-	exit 1;	
+	exit 1;
 fi
 
 %files
@@ -181,4 +181,3 @@ fi
 %dir /var/spool
 %dir /var/run
 %attr(1777,root,root) %dir /var/tmp
-	
