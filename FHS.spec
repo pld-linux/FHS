@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	6
+Release:	7
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -47,7 +47,7 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,dev,home/users,opt} \
 	$RPM_BUILD_ROOT/etc/{X11,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
@@ -59,7 +59,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT%{_applnkdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
-	$RPM_BUILD_ROOT%{_fontsdir}/{Type1,latin2}
+	$RPM_BUILD_ROOT%{_fontsdir}/{Type1/{afm,pfm},latin2}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -75,14 +75,14 @@ install -d $RPM_BUILD_ROOT%{_mandir}/mann
 %clean
 cd $RPM_BUILD_ROOT 
 
-# %{_rpmfilename} does not expanded, so use   
+# %{_rpmfilename} is not expanded, so use   
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
 RPMFILE=%{name}-%{version}-%{release}.%{buildarch}.rpm
 TMPFILE=%{name}-%{version}.tmp$$
 find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
 
 # find finds also '.', so use option -B for diff
-if rpm -qpl %{_rpmdir}/$RPMFILE | sort | diff -uB $TMPFILE - ; then
+if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - ; then
      rm -rf $RPM_BUILD_ROOT
 else 
     echo -e "\nNot so good, some directories not included in package\n"
@@ -91,8 +91,10 @@ fi
 
 %files
 %defattr(644,root,root,755)
+%dir /
 /bin
-%attr(755,root,root) /boot
+/boot
+/dev
 %dir %{_sysconfdir}
 %attr(751,root,root) %dir /etc/security
 %dir %{_sysconfdir}/profile.d
