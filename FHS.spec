@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	6
+Release:	7
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -188,15 +188,9 @@ fi
 %dir /usr/X11R6
 %dir %{_xmandir}
 %{_xmandir}/man*
-%lang(da) %{_xmandir}/da
-%lang(fi) %{_xmandir}/fi
-%lang(fr) %{_xmandir}/fr
-%lang(hu) %{_xmandir}/hu
 %lang(it) %{_xmandir}/it
-%lang(ja) %{_xmandir}/ja
 %lang(ko) %{_xmandir}/ko
 %lang(pl) %{_xmandir}/pl
-%lang(sk) %{_xmandir}/sk
 %dir /usr/X11R6/share
 
 %dir /var
