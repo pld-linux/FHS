@@ -64,7 +64,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
-	$RPM_BUILD_ROOT{%{_idldir},%{_idldir}} \
+	$RPM_BUILD_ROOT{%{_idldir},%{_oldidldir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
 	$RPM_BUILD_ROOT%{_fontsdir}/TTF \
 	$RPM_BUILD_ROOT%{_fontsdir}/misc \
