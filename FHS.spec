@@ -75,9 +75,9 @@ done
 install -d $RPM_BUILD_ROOT%{_mandir}/mann
 
 %clean
-cd $RPM_BUILD_ROOT 
+cd $RPM_BUILD_ROOT
 
-# %{_rpmfilename} is not expanded, so use   
+# %{_rpmfilename} is not expanded, so use
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
 RPMFILE=%{name}-%{version}-%{release}.%{buildarch}.rpm
 TMPFILE=%{name}-%{version}.tmp$$
@@ -85,10 +85,10 @@ find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
 
 # find finds also '.', so use option -B for diff
 if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - ; then
-     rm -rf $RPM_BUILD_ROOT
-else 
-    echo -e "\nNot so good, some directories not included in package\n"
-    exit 1;	
+	rm -rf $RPM_BUILD_ROOT
+else
+	echo -e "\nNot so good, some directories not included in package\n"
+	exit 1;	
 fi
 
 %files
@@ -98,27 +98,28 @@ fi
 /boot
 /dev
 %dir %{_sysconfdir}
-%attr(751,root,root) %dir /etc/security
-%dir %{_sysconfdir}/opt
 %dir %{_sysconfdir}/X11
+%dir %{_sysconfdir}/opt
+%attr(751,root,root) %dir /etc/security
 /home
 /lib
 /mnt
 /opt
-%attr(555,root,proc) /proc
+%attr(555,root,root) /proc
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
 %dir /usr
 /usr/bin
-/usr/src
 /usr/games
-/usr/lib
 /usr/include
+/usr/lib
 /usr/sbin
 %dir /usr/share
 /usr/share/dict
 /usr/share/doc
+%{_fontsdir}
+/usr/share/games
 /usr/share/info
 %dir %{_mandir}
 %dir %{_mandir}/man*
@@ -140,17 +141,17 @@ fi
 %lang(sk) %{_mandir}/sk
 %lang(sv) %{_mandir}/sv
 /usr/share/misc
-/usr/share/games
 /usr/share/tmac
+/usr/src
 %dir /usr/local
 /usr/local/bin
 /usr/local/games
-%dir /usr/local/share
-/usr/local/share/info
-/usr/local/share/doc
-%{_locmandir}
 /usr/local/lib
 /usr/local/sbin
+%dir /usr/local/share
+/usr/local/share/doc
+/usr/local/share/info
+%{_locmandir}
 /usr/local/src
 %dir /usr/X11R6
 %dir %{_xmandir}
@@ -159,7 +160,6 @@ fi
 %dir /usr/X11R6/share
 %{_applnkdir}
 /usr/X11R6/share/idl
-%{_fontsdir}
 
 %dir /var
 /var/cache
@@ -168,8 +168,8 @@ fi
 %dir /var/games
 %dir /var/lib
 %dir /var/lib/misc
-%attr(751,root,root) /var/log
 /var/lock
+%attr(751,root,root) /var/log
 %attr(775,root,mail) /var/mail
 %dir /var/opt
 %dir /var/spool
