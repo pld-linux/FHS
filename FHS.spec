@@ -52,7 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,selinux,srv,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,certs,opt,security} \
-	$RPM_BUILD_ROOT{/lib/modules,/%{_lib}/security} \
+	$RPM_BUILD_ROOT/%{_lib}/{firmware,modules,security} \
 	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
