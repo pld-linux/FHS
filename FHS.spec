@@ -60,8 +60,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,opt,tmp} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
-	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
-	$RPM_BUILD_ROOT%{_applnkdir}
+	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -164,7 +163,6 @@ fi
 %{_xmandir}/man*
 %lang(fr) %{_xmandir}/fr
 %dir /usr/X11R6/share
-%{_applnkdir}
 /usr/X11R6/share/idl
 
 %dir /var
