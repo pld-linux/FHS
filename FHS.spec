@@ -5,11 +5,11 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
-PreReq:		setup >= 2.4.5-4
+PreReq:		setup >= 2.4.7-1
 Provides:	filesystem
 Obsoletes:	filesystem
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
