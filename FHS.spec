@@ -131,8 +131,10 @@ fi
 %lang(es) %{_mandir}/es
 %lang(fi) %{_mandir}/fi
 %lang(fr) %{_mandir}/fr
+%lang(hu) %{_mandir}/hu
 %lang(it) %{_mandir}/it
 %lang(ja) %{_mandir}/ja
+%lang(ko) %{_mandir}/ko
 %lang(nl) %{_mandir}/nl
 %lang(pl) %{_mandir}/pl
 %lang(pt) %{_mandir}/pt
