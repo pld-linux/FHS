@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	13
+Release:	14
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -53,12 +53,12 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
-	$RPM_BUILD_ROOT/lib/{modules,security} \
+	$RPM_BUILD_ROOT/{lib/{modules,security},lib64} \
 	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib{,64},sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib{,64},sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
 	$RPM_BUILD_ROOT%{_idldir} \
@@ -113,6 +113,7 @@ fi
 /home/users
 %attr(751,root,root) /home/services
 /lib
+/lib64
 /mnt
 /opt
 %attr(555,root,proc) %verify(not group) /proc
@@ -125,6 +126,7 @@ fi
 %{_prefix}/games
 %{_prefix}/include
 %{_prefix}/lib
+%{_prefix}/lib64
 %{_prefix}/sbin
 %dir %{_prefix}/share
 %{_datadir}/applications
@@ -169,6 +171,7 @@ fi
 %{_prefix}/local/games
 %{_prefix}/local/include
 %{_prefix}/local/lib
+%{_prefix}/local/lib64
 %{_prefix}/local/sbin
 %dir %{_prefix}/local/share
 %{_prefix}/local/share/doc
