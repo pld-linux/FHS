@@ -9,8 +9,6 @@ Release:	12
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
-BuildRequires:	grep
-BuildRequires:	textutils
 PreReq:		setup
 Provides:	filesystem
 Obsoletes:	filesystem
