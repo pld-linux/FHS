@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
 Group(de):	Gründsätzlich
@@ -51,20 +51,19 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,dev,home/users,opt} \
-	$RPM_BUILD_ROOT/etc/{X11,security,opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/users,opt} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
-	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,src/examples,games,lib,include,sbin,share} \
-	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,misc,games,tmac} \
-	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,share/{info,doc},lib,sbin,src} \
+	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include,lib,sbin,share,src/examples} \
+	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,games,info,misc,tmac} \
+	$RPM_BUILD_ROOT%{_libdir}/{games,pkgconfig} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
-	$RPM_BUILD_ROOT/var/{games,lib/misc,tmp,db,opt,crash,cache} \
-	$RPM_BUILD_ROOT/var/cache \
-	$RPM_BUILD_ROOT%{_applnkdir} \
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,opt,tmp} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
-	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm}
+	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
+	$RPM_BUILD_ROOT%{_applnkdir}
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
@@ -100,7 +99,7 @@ fi
 /bin
 /boot
 /dev
-%dir %{_sysconfdir}
+%dir /etc
 %dir %{_sysconfdir}/X11
 %dir %{_sysconfdir}/opt
 %attr(751,root,root) %dir /etc/security
@@ -112,18 +111,18 @@ fi
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
-%dir /usr
-/usr/bin
-/usr/games
-/usr/include
-/usr/lib
-/usr/sbin
-%dir /usr/share
-/usr/share/dict
-/usr/share/doc
+%dir %{_prefix}
+%{_prefix}/bin
+%{_prefix}/games
+%{_prefix}/include
+%{_prefix}/lib
+%{_prefix}/sbin
+%dir %{_prefix}/share
+%{_datadir}/dict
+%{_datadir}/doc
 %{_fontsdir}
-/usr/share/games
-/usr/share/info
+%{_datadir}/games
+%{_datadir}/info
 %dir %{_mandir}
 %dir %{_mandir}/man*
 %lang(bg) %{_mandir}/bg
@@ -147,19 +146,19 @@ fi
 %lang(sl) %{_mandir}/sl
 %lang(sk) %{_mandir}/sk
 %lang(sv) %{_mandir}/sv
-/usr/share/misc
-/usr/share/tmac
-/usr/src
-%dir /usr/local
-/usr/local/bin
-/usr/local/games
-/usr/local/lib
-/usr/local/sbin
-%dir /usr/local/share
-/usr/local/share/doc
-/usr/local/share/info
+%{_datadir}/misc
+%{_datadir}/tmac
+%{_prefix}/src
+%dir %{_prefix}/local
+%{_prefix}/local/bin
+%{_prefix}/local/games
+%{_prefix}/local/lib
+%{_prefix}/local/sbin
+%dir %{_prefix}/local/share
+%{_prefix}/local/share/doc
+%{_prefix}/local/share/info
 %{_locmandir}
-/usr/local/src
+%{_prefix}/local/src
 %dir /usr/X11R6
 %dir %{_xmandir}
 %{_xmandir}/man*
@@ -179,6 +178,6 @@ fi
 %attr(751,root,root) /var/log
 %attr(775,root,mail) /var/mail
 %dir /var/opt
-%dir /var/spool
 %dir /var/run
+%dir /var/spool
 %attr(1777,root,root) %dir /var/tmp
