@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -57,9 +57,9 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,lib,sbin,share/{doc,info},src} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
-	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,opt,tmp} \
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
 	$RPM_BUILD_ROOT/usr/X11R6/share/idl \
 	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
 	$RPM_BUILD_ROOT%{_privsepdir}
@@ -76,6 +76,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	done
 done
 install -d $RPM_BUILD_ROOT%{_mandir}/man{n,l}
+install -d $RPM_BUILD_ROOT%{_mandir}/pl/mann
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -157,6 +158,7 @@ fi
 %dir %{_prefix}/local
 %{_prefix}/local/bin
 %{_prefix}/local/games
+%{_prefix}/local/include
 %{_prefix}/local/lib
 %{_prefix}/local/sbin
 %dir %{_prefix}/local/share
@@ -186,6 +188,7 @@ fi
 %dir /var/games
 %dir /var/lib
 %dir /var/lib/misc
+%dir /var/local
 %attr(1771,root,uucp) %dir /var/lock
 %attr(700,root,root) %dir /var/lock/subsys
 %attr(751,root,root) /var/log
