@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	4
+Release:	5
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -52,7 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,selinux,srv,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
-	$RPM_BUILD_ROOT/lib/{modules,security} \
+	$RPM_BUILD_ROOT{/lib/modules,/%{_lib}/security} \
 	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
@@ -67,7 +67,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,se
 	$RPM_BUILD_ROOT%{_privsepdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share
 
-%ifarch ppc64 sparc64 x86_64
+%ifarch amd64 ppc64 sparc64
 install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
 %endif
 
