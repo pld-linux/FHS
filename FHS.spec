@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	14
+Release:	15
 License:	GPL
 Group:		Base
 Group(de):	Gründsätzlich
@@ -55,7 +55,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,home/users,opt} \
 	$RPM_BUILD_ROOT/etc/{X11,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,src,games,lib,include,sbin,share} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,src/examples,games,lib,include,sbin,share} \
 	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,misc,games,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
 	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,share/{info,doc},lib,sbin,src} \
@@ -70,7 +70,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
-	for mloc in bg cs da de es fi fr hr hu it ja ko nl pl pt pt_BR ru sl sk sv ; do
+	for mloc in bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sk sv ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
 	done
 	install -d $RPM_BUILD_ROOT%{_xmandir}/fr/${manp}
@@ -135,6 +135,7 @@ fi
 %lang(fr) %{_mandir}/fr
 %lang(hr) %{_mandir}/hr
 %lang(hu) %{_mandir}/hu
+%lang(id) %{_mandir}/id
 %lang(it) %{_mandir}/it
 %lang(ja) %{_mandir}/ja
 %lang(ko) %{_mandir}/ko
