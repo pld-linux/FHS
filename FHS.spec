@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	8
+Release:	9
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -57,7 +57,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt,sys} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include,lib,sbin,share,src/examples} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
 	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,include,lib,sbin,share/{doc,info},src} \
