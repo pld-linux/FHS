@@ -5,13 +5,24 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
-Group(de):	Gründsätzlich
+Group(cs):	Základ
+Group(da):	Basal
+Group(de):	Basis
 Group(es):	Base
+Group(fr):	Base
+Group(is):	Grunnforrit
+Group(it):	Base
+Group(ja):	¥Ù¡¼¥¹
+Group(no):	Basis
 Group(pl):	Podstawowe
+Group(pt):	Base
 Group(pt_BR):	Base
+Group(ru):	âÁÚÏ×ÙÊ ÎÁÂÏÒ
+Group(sl):	Osnova
+Group(sv):	Bas
 URL:		http://www.pathname.com/fhs/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	grep
@@ -53,7 +64,7 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/users,opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,dev,etc,home/{users,services},opt} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,opt,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{cdrom,floppy},proc,root,sbin,tmp} \
@@ -105,7 +116,9 @@ fi
 %dir %{_sysconfdir}/X11
 %dir %{_sysconfdir}/opt
 %attr(751,root,root) %dir /etc/security
-/home
+%dir /home
+/home/users
+%attr(751,root,root) /home/services
 /lib
 /mnt
 /opt
