@@ -3,7 +3,7 @@ Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
 Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.0
 Summary(tr):	Temel dosya sistemi yapýsý
-Name:		filesystem
+Name:		FHS
 Version:	1.0
 Release:	0.1
 License:	GPL
