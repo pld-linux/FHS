@@ -9,7 +9,7 @@ Release:	0.1
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
-PreReq:		setup
+PreReq:		setup >= 3.4.5-4
 Provides:	filesystem
 Obsoletes:	filesystem
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
