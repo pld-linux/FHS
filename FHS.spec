@@ -181,8 +181,8 @@ fi
 %dir /var/games
 %dir /var/lib
 %dir /var/lib/misc
-/var/lock
-%attr(4771,root,uucp) /var/log
+%attr(1771,root,uucp) /var/lock
+%attr(751,root,root) /var/log
 %attr(775,root,mail) /var/mail
 %dir /var/opt
 %dir /var/run
