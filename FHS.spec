@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
@@ -57,7 +57,21 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT%{_applnkdir}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+cd $RPM_BUILD_ROOT 
+
+# %{_rpmfilename} does not expanded, so use   
+# %{name}-%{version}-%{release}.%{buildarch}.rpm
+RPMFILE=%{name}-%{version}-%{release}.%{buildarch}.rpm
+TMPFILE=%{name}-%{version}.tmp$$
+find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
+
+# find finds also '.', so use option -B for diff
+if rpm -qpl %{_rpmdir}/$RPMFILE | sort | diff -uB $TMPFILE - ; then
+     rm -rf $RPM_BUILD_ROOT
+else 
+    echo -e "\nNot so good, some directories not included in package\n"
+    exit 1;	
+fi
 
 %files
 %defattr(755,root,root,755)
@@ -78,13 +92,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(1777,root,root) /tmp
 %{_prefix}
 %dir /var
+/var/cache
+%dir /var/crash
 %dir /var/db
 %dir /var/games
-/var/lock
-%attr(751,root,root) /var/log
-%dir /var/run
-%dir /var/crash
-/var/cache
 %dir /var/lib
+%dir /var/lib/misc
+%attr(751,root,root) /var/log
+/var/lock
+%attr(775,root,mail) /var/mail
 %dir /var/opt
+%dir /var/spool
+%dir /var/run
 %attr(1777,root,root) %dir /var/tmp
+	
