@@ -1,10 +1,10 @@
-Summary:	Basic FHS 2.0 filesystem layout
+Summary:	Basic FHS 2.1 filesystem layout
 Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
-Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.0
+Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
-Version:	1.1
+Version:	2.1
 Release:	1
 License:	GPL
 Group:		Base
@@ -18,22 +18,22 @@ Obsoletes:	filesystem
 %description
 This package contains the basic directory layout for a Linux system, 
 including the proper permissions for the directories. This layout conforms
-to the Filesystem Hierarchy Standard (FHS) 2.0.
+to the Filesystem Hierarchy Standard (FHS) 2.1.
 
 %description -l de
 Dieses Paket enthält die grundlegende Verzeichnisstruktur eines Linux-Systems,
 einschließlich der entsprechenden Zugriffsrechte. Diese Struktur entspricht
-dem Filesystem Hierarchy Standard (FHS) 2.0.
+dem Filesystem Hierarchy Standard (FHS) 2.1.
 
 %description -l fr
 Ce package contient l'arborescence type pour système linux
 y compris les permissions adéquates pour les répertoires. Cette
 arborescence est conforme au standard \"Filesystem Hierarchy Standard\"
-(FHS) 2.0.
+(FHS) 2.1.
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów systemu i
-praw dostêpu do nich. Struktura katalogów jest zgodna z FHS 2.0.
+praw dostêpu do nich. Struktura katalogów jest zgodna z FHS 2.1.
  
 %description -l tr
 Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak ayrýþtýrýlabilen
@@ -52,7 +52,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,tmac} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
-	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache} \
+	$RPM_BUILD_ROOT/var/{games,lib/misc,tmp,db,opt,crash,cache} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
 
@@ -85,6 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/run
 %dir /var/crash
 /var/cache
-%dir /var/state
+%dir /var/lib
 %dir /var/opt
 %attr(1777,root,root) %dir /var/tmp
