@@ -1,0 +1,3 @@
+- added %verify(not group) to /proc (can be root or proc depending on kernel)
+- added Group(de)
+- release 12
