@@ -8,21 +8,6 @@ Version:	2.1
 Release:	16
 License:	GPL
 Group:		Base
-Group(cs):	ZАklad
-Group(da):	Basal
-Group(de):	Basis
-Group(es):	Base
-Group(fr):	Base
-Group(is):	Grunnforrit
-Group(it):	Base
-Group(ja):	╔ы║╪╔╧
-Group(no):	Basis
-Group(pl):	Podstawowe
-Group(pt):	Base
-Group(pt_BR):	Base
-Group(ru):	Базовый набор
-Group(sl):	Osnova
-Group(sv):	Bas
 URL:		http://www.pathname.com/fhs/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	grep
