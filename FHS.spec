@@ -5,13 +5,14 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux zgodny z FHS 2.0
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.0
-Release:	1
+Release:	0.1
 License:	GPL
 Group:		Base
 Group(pl):	Podstawowe
 Buildroot:	/tmp/%{name}-%{version}-root
 Prereq:		setup
 Buildarch:	noarch
+Provides:	filesystem
 Obsoletes:	filesystem
 
 %description
@@ -54,13 +55,6 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
-
-%post
-if [ -L /var/tmp ]; then
-	rm -rf /var/tmp
-	mkdir -p /var/tmp
-	chmod 1777 /var/tmp
-fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
