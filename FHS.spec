@@ -16,28 +16,28 @@ Provides:	filesystem
 Obsoletes:	filesystem
 
 %description
-This package contains the basic directory layout for a Linux system, 
-including the proper permissions for the directories. This layout conforms
-to the Filesystem Hierarchy Standard (FHS) 2.1.
+This package contains the basic directory layout for a Linux system,
+including the proper permissions for the directories. This layout
+conforms to the Filesystem Hierarchy Standard (FHS) 2.1.
 
 %description -l de
-Dieses Paket enthält die grundlegende Verzeichnisstruktur eines Linux-Systems,
-einschließlich der entsprechenden Zugriffsrechte. Diese Struktur entspricht
-dem Filesystem Hierarchy Standard (FHS) 2.1.
+Dieses Paket enthält die grundlegende Verzeichnisstruktur eines
+Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
+Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.1.
 
 %description -l fr
-Ce package contient l'arborescence type pour système linux
-y compris les permissions adéquates pour les répertoires. Cette
-arborescence est conforme au standard \"Filesystem Hierarchy Standard\"
-(FHS) 2.1.
+Ce package contient l'arborescence type pour système linux y compris
+les permissions adéquates pour les répertoires. Cette arborescence est
+conforme au standard \"Filesystem Hierarchy Standard\" (FHS) 2.1.
 
 %description -l pl
-Pakiet ten zawiera informacje o podstawowej strukturze katalogów systemu i
-praw dostêpu do nich. Struktura katalogów jest zgodna z FHS 2.1.
- 
+Pakiet ten zawiera informacje o podstawowej strukturze katalogów
+systemu i praw dostêpu do nich. Struktura katalogów jest zgodna z FHS
+2.1.
+
 %description -l tr
-Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak ayrýþtýrýlabilen
-metin dosyalarý yazýmý için yararlýdýr.
+Bu paket GNU makro iþleme dilini içerir. Mantýksal olarak
+ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 
 %prep
 
@@ -48,13 +48,13 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/etc/{X11,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
-	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,tmac} \
-	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,src,games,lib,include,sbin,share} \
+	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,man,misc,games,tmac} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,lib/misc,tmp,db,opt,crash,cache} \
 	$RPM_BUILD_ROOT/var/cache \
-	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
+	$RPM_BUILD_ROOT%{_applnkdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,11 +63,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(755,root,root,755)
 /bin
 %attr(700,root,root) /boot
-%dir /etc
+%dir %{_sysconfdir}
 %attr(751,root,root) %dir /etc/security
-%dir /etc/profile.d
-%dir /etc/opt
-%dir /etc/X11
+%dir %{_sysconfdir}/profile.d
+%dir %{_sysconfdir}/opt
+%dir %{_sysconfdir}/X11
 /home
 /lib
 /mnt
@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
-/usr
+%{_prefix}
 %dir /var
 %dir /var/db
 %dir /var/games
