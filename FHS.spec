@@ -15,6 +15,9 @@ Buildarch:	noarch
 Provides:	filesystem
 Obsoletes:	filesystem
 
+%define		_locmandir	/usr/local/share/man
+%define		_xmandir	/usr/X11R6/man
+
 %description
 This package contains the basic directory layout for a Linux system,
 including the proper permissions for the directories. This layout
@@ -49,12 +52,23 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT%{_prefix}/{bin,src,games,lib,include,sbin,share} \
-	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,man,misc,games,tmac} \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
+	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,misc,games,tmac} \
+	$RPM_BUILD_ROOT%{_prefix}/local/{bin,games,share/{info,doc},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,lib/misc,tmp,db,opt,crash,cache} \
 	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT%{_applnkdir}
+
+for manp in man{1,2,3,4,5,6,7,8} ; do
+	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
+	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
+	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
+	for mloc in bg cs da de es fi fr it ja nl pl pt pt_BR ru sl sk sv ; do
+		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
+	done
+	install -d $RPM_BUILD_ROOT%{_xmandir}/fr/${manp}
+done
+install -d $RPM_BUILD_ROOT%{_mandir}/mann
 
 %clean
 cd $RPM_BUILD_ROOT 
@@ -90,7 +104,56 @@ fi
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
-%{_prefix}
+%dir /usr
+/usr/bin
+/usr/src
+/usr/games
+/usr/lib
+/usr/include
+/usr/sbin
+%dir /usr/share
+/usr/share/dict
+/usr/share/doc
+/usr/share/info
+%dir %{_mandir}
+%dir %{_mandir}/man*
+%lang(bg) %{_mandir}/bg
+%lang(cs) %{_mandir}/cs
+%lang(da) %{_mandir}/da
+%lang(de) %{_mandir}/de
+%lang(es) %{_mandir}/es
+%lang(fi) %{_mandir}/fi
+%lang(fr) %{_mandir}/fr
+%lang(it) %{_mandir}/it
+%lang(ja) %{_mandir}/ja
+%lang(nl) %{_mandir}/nl
+%lang(pl) %{_mandir}/pl
+%lang(pt) %{_mandir}/pt
+%lang(pt_BR) %{_mandir}/pt_BR
+%lang(ru) %{_mandir}/ru
+%lang(sl) %{_mandir}/sl
+%lang(sk) %{_mandir}/sk
+%lang(sv) %{_mandir}/sv
+/usr/share/misc
+/usr/share/games
+/usr/share/tmac
+%dir /usr/local
+/usr/local/bin
+/usr/local/games
+%dir /usr/local/share
+/usr/local/share/info
+/usr/local/share/doc
+%{_locmandir}
+/usr/local/lib
+/usr/local/sbin
+/usr/local/src
+%dir /usr/X11R6
+%dir %{_xmandir}
+%{_xmandir}/man*
+%lang(fr) %{_xmandir}/fr
+%dir /usr/X11R6/share
+%{_applnkdir}
+
 %dir /var
 /var/cache
 %dir /var/crash
