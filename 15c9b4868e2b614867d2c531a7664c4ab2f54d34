@@ -1,0 +1,2 @@
+- initial version package with base filesystem hierarchy structure compliant
+  with FHS 2.0 (this package obsoletets filesystem).
