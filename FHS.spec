@@ -22,7 +22,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # directory for "privilege separation" chroot
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
-%define		_idldir		/usr/share/idl
+%define		_idldir		/usr/X11R6/share/idl
 
 %description
 This package contains the basic directory layout for a Linux system,
