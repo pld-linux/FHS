@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.2
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.2
-Release:	12
+Release:	13
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -200,7 +200,7 @@ fi
 %attr(1771,root,uucp) %dir /var/lock
 %attr(700,root,root) %dir /var/lock/subsys
 %attr(751,root,root) /var/log
-%attr(775,root,mail) /var/mail
+%attr(2775,root,mail) /var/mail
 %dir /var/opt
 %dir /var/run
 %dir /var/spool
