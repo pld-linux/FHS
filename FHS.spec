@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.1
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.1
-Release:	19
+Release:	20
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -69,7 +69,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	for mloc in bg cs da de es fi fr hr hu id it ja ko nl pl pt pt_BR ru sl sk sv ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
 	done
-	for mloc in fr ja ; do
+	for mloc in fr it ja ko pl ; do
 		install -d $RPM_BUILD_ROOT%{_xmandir}/%{mloc}/${manp}
 	done
 done
