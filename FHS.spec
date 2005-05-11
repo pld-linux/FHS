@@ -9,6 +9,7 @@ Release:	11
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
+BuildRequires:	rpmbuild(macros) >= 1.213
 PreReq:		setup >= 2.4.6-4
 Provides:	filesystem
 Obsoletes:	filesystem
@@ -68,7 +69,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,se
 	$RPM_BUILD_ROOT%{_privsepdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share
 
-%ifarch amd64 ppc64 sparc64
+%ifarch %{x8664} ppc64 s390x sparc64
 install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
 %endif
 
