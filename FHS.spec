@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	11
+Release:	12
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -55,10 +55,9 @@ install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,se
 	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,certs,opt,security} \
 	$RPM_BUILD_ROOT{/lib/{firmware,modules},/%{_lib}/security} \
 	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib,sbin,share,src/examples} \
+	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib/cgi-bin,sbin,share,src/examples} \
 	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
 	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_libdir}/cgi-bin \
 	$RPM_BUILD_ROOT%{_prefix}/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
@@ -182,7 +181,7 @@ fi
 %lang(zh_TW) %{_mandir}/zh_TW
 %{_datadir}/misc
 %{_datadir}/tmac
-%dir %{_libdir}/cgi-bin
+%dir %{_prefix}/lib/cgi-bin
 %{_prefix}/src
 %dir %{_prefix}/local
 %{_prefix}/local/bin
