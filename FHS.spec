@@ -77,7 +77,7 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
 	for mloc in bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
-		    pt_BR ro ru sl sk sr sv tr uk zh_CN zh_TW ; do
+		    pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
 	done
 	for mloc in it ko pl ; do
