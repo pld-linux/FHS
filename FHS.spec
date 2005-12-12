@@ -10,7 +10,7 @@ License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
 BuildRequires:	rpmbuild(macros) >= 1.213
-PreReq:		setup >= 2.4.6-4
+Requires:	setup >= 2.4.6-4
 Provides:	filesystem
 Obsoletes:	filesystem
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
