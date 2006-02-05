@@ -16,7 +16,6 @@ Obsoletes:	filesystem
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
-%define		_xmandir	/usr/X11R6/man
 # directory for "privilege separation" chroot
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
@@ -70,8 +69,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,se
 	$RPM_BUILD_ROOT%{_fontsdir}/cyrillic \
 	$RPM_BUILD_ROOT%{_fontsdir}/local \
 	$RPM_BUILD_ROOT%{_fontsdir}/misc \
-	$RPM_BUILD_ROOT%{_privsepdir} \
-	$RPM_BUILD_ROOT/usr/X11R6/share
+	$RPM_BUILD_ROOT%{_privsepdir}
 
 %ifarch %{x8664} ppc64 s390x sparc64
 install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
@@ -80,13 +78,9 @@ install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
-	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
 	for mloc in bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
 		    pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
 		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
-	done
-	for mloc in it ko pl ; do
-		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
 	done
 done
 install -d $RPM_BUILD_ROOT%{_mandir}/man{n,l}
@@ -202,14 +196,6 @@ fi
 %{_prefix}/local/share/info
 %{_locmandir}
 %{_prefix}/local/src
-%dir /usr/X11R6
-%dir %{_xmandir}
-%{_xmandir}/man*
-%lang(it) %{_xmandir}/it
-%lang(ko) %{_xmandir}/ko
-%lang(pl) %{_xmandir}/pl
-%dir /usr/X11R6/share
-
 %dir /var
 /var/cache
 %dir /var/crash
