@@ -5,7 +5,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	13
+Release:	14
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -62,8 +62,13 @@ install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,se
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
 	$RPM_BUILD_ROOT%{_idldir} \
+	$RPM_BUILD_ROOT%{_fontsdir}/{100,75}dpi \
+	$RPM_BUILD_ROOT%{_fontsdir}/OTF \
+	$RPM_BUILD_ROOT%{_fontsdir}/Speedo \
 	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
 	$RPM_BUILD_ROOT%{_fontsdir}/TTF \
+	$RPM_BUILD_ROOT%{_fontsdir}/cyrillic \
+	$RPM_BUILD_ROOT%{_fontsdir}/local \
 	$RPM_BUILD_ROOT%{_fontsdir}/misc \
 	$RPM_BUILD_ROOT%{_privsepdir} \
 	$RPM_BUILD_ROOT/usr/X11R6/share
