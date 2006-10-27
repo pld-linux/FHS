@@ -1,3 +1,4 @@
+# NOTE: don't use %{_*dir} macros for paths defined by FHS
 Summary:	Basic FHS 2.3 filesystem layout
 Summary(de):	Grundlegende Dateisystemstruktur
 Summary(fr):	Arborescence de base du système de fichiers
@@ -5,7 +6,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	14.2
+Release:	15
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -14,10 +15,6 @@ Requires:	setup >= 2.4.6-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
-# directory for "privilege separation" chroot
-%define		_privsepdir	/usr/share/empty
-# directory for *.idl files (for CORBA implementations)
-%define		_idldir		/usr/share/idl
 
 %description
 This package contains the basic directory layout for a Linux system,
@@ -48,42 +45,31 @@ ayrýþtýrýlabilen metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,initrd,dev,etc,home/{users,services},opt,selinux,srv,sys} \
-	$RPM_BUILD_ROOT%{_sysconfdir}/{X11,certs,opt,security} \
-	$RPM_BUILD_ROOT{/lib/{firmware,modules},/%{_lib}/security} \
+install -d \
+	$RPM_BUILD_ROOT/{bin,boot,dev,etc,home,opt,srv} \
+	$RPM_BUILD_ROOT/etc/{X11,opt} \
+	$RPM_BUILD_ROOT/lib/modules \
 	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT%{_prefix}/{bin,games,include/security,lib/cgi-bin,sbin,share,src/examples} \
-	$RPM_BUILD_ROOT%{_datadir}/{applications,dict,doc,games,info,misc,tmac} \
-	$RPM_BUILD_ROOT%{_libdir}/games \
-	$RPM_BUILD_ROOT%{_prefix}/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
-	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
-	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,opt,tmp} \
-	$RPM_BUILD_ROOT%{_idldir} \
-	$RPM_BUILD_ROOT%{_fontsdir}/{100,75}dpi \
-	$RPM_BUILD_ROOT%{_fontsdir}/OTF \
-	$RPM_BUILD_ROOT%{_fontsdir}/Speedo \
-	$RPM_BUILD_ROOT%{_fontsdir}/Type1/{afm,pfm} \
-	$RPM_BUILD_ROOT%{_fontsdir}/TTF \
-	$RPM_BUILD_ROOT%{_fontsdir}/cyrillic \
-	$RPM_BUILD_ROOT%{_fontsdir}/local \
-	$RPM_BUILD_ROOT%{_fontsdir}/misc \
-	$RPM_BUILD_ROOT%{_privsepdir}
+	$RPM_BUILD_ROOT/usr/{bin,games,include,lib,sbin,share,src} \
+	$RPM_BUILD_ROOT/usr/share/{dict,doc,games,info,misc,tmac} \
+	$RPM_BUILD_ROOT/usr/lib/games \
+	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,lock,log,mail,opt,run,spool,tmp}
 
-%ifarch %{x8664} ppc64 s390x sparc64
-install -d $RPM_BUILD_ROOT{/lib64,%{_prefix}/lib64,%{_prefix}/local/lib64}
+%if "%{_lib}" == "lib64"
+install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
 %endif
 
 for manp in man{1,2,3,4,5,6,7,8} ; do
-	install -d $RPM_BUILD_ROOT%{_mandir}/${manp}
+	install -d $RPM_BUILD_ROOT/usr/share/man/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
 	for mloc in bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
 		    pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
-		install -d $RPM_BUILD_ROOT%{_mandir}/${mloc}/${manp}
+		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
 	done
 done
-install -d $RPM_BUILD_ROOT%{_mandir}/man{n,l}
-install -d $RPM_BUILD_ROOT%{_mandir}/pl/mann
 
+# "/usr/local/share/man and /usr/local/man must be synonomous" per FHS 2.3
 ln -sf ../man $RPM_BUILD_ROOT/usr/local/share/man
 
 %clean
@@ -106,96 +92,87 @@ fi
 %files
 %defattr(644,root,root,755)
 %dir /
-/bin
-/boot
-/initrd
-/dev
+%dir /bin
+%dir /boot
+%dir /dev
 %dir /etc
-%dir %{_sysconfdir}/X11
-%attr(751,root,root) %dir /etc/certs
-%dir %{_sysconfdir}/opt
-%attr(751,root,root) %dir /etc/security
+%dir /etc/X11
+%dir /etc/opt
 %dir /home
-/home/users
-%attr(751,root,adm) /home/services
-/lib
+%dir /lib
+%dir /lib/modules
 %attr(775,root,disk) %dir /media
 %attr(775,root,disk) /media/floppy
 %attr(775,root,disk) /media/cdrom
-/mnt
-/opt
+%dir /mnt
+%dir /opt
 %attr(555,root,proc) %verify(not group) /proc
 %attr(700,root,root) /root
 %dir /sbin
-%dir /sys
-%dir /selinux
 %attr(751,root,root) /srv
 %attr(1777,root,root) /tmp
-%dir %{_prefix}
-%{_prefix}/bin
-%{_prefix}/games
-%{_prefix}/include
-%{_prefix}/lib
-%{_prefix}/sbin
-%dir %{_prefix}/share
-%{_datadir}/applications
-%{_datadir}/dict
-%{_datadir}/doc
-%{_privsepdir}
-%{_fontsdir}
-%{_idldir}
-%{_datadir}/games
-%{_datadir}/info
-%dir %{_mandir}
-%dir %{_mandir}/man*
-%lang(bg) %{_mandir}/bg
-%lang(cs) %{_mandir}/cs
-%lang(da) %{_mandir}/da
-%lang(de) %{_mandir}/de
-%lang(el) %{_mandir}/el
-%lang(es) %{_mandir}/es
-%lang(fi) %{_mandir}/fi
-%lang(fr) %{_mandir}/fr
-%lang(gl) %{_mandir}/gl
-%lang(hr) %{_mandir}/hr
-%lang(hu) %{_mandir}/hu
-%lang(id) %{_mandir}/id
-%lang(it) %{_mandir}/it
-%lang(ja) %{_mandir}/ja
-%lang(ko) %{_mandir}/ko
-%lang(nl) %{_mandir}/nl
-%lang(pl) %{_mandir}/pl
-%lang(pt) %{_mandir}/pt
-%lang(pt_BR) %{_mandir}/pt_BR
-%lang(ro) %{_mandir}/ro
-%lang(ru) %{_mandir}/ru
-%lang(sl) %{_mandir}/sl
-%lang(sk) %{_mandir}/sk
-%lang(sr) %{_mandir}/sr
-%lang(sv) %{_mandir}/sv
-%lang(tr) %{_mandir}/tr
-%lang(uk) %{_mandir}/uk
-%lang(zh_CN) %{_mandir}/zh_CN
-%lang(zh_TW) %{_mandir}/zh_TW
-%{_datadir}/misc
-%{_datadir}/tmac
-%dir %{_prefix}/lib/cgi-bin
-%{_prefix}/src
-%dir %{_prefix}/local
-%{_prefix}/local/bin
-%{_prefix}/local/etc
-%{_prefix}/local/games
-%{_prefix}/local/include
-%{_prefix}/local/lib
-%{_prefix}/local/sbin
-%dir %{_prefix}/local/share
-%{_prefix}/local/share/doc
-%{_prefix}/local/share/man
-%{_prefix}/local/share/info
+%dir /usr
+%dir /usr/bin
+%dir /usr/games
+%dir /usr/include
+%dir /usr/lib
+%dir /usr/lib/games
+%dir /usr/sbin
+%dir /usr/share
+%dir /usr/share/dict
+%dir /usr/share/doc
+%dir /usr/share/games
+%dir /usr/share/info
+%dir /usr/share
+%dir /usr/share/man
+%dir /usr/share/man/man[1-8]
+%lang(bg) /usr/share/man/bg
+%lang(cs) /usr/share/man/cs
+%lang(da) /usr/share/man/da
+%lang(de) /usr/share/man/de
+%lang(el) /usr/share/man/el
+%lang(es) /usr/share/man/es
+%lang(fi) /usr/share/man/fi
+%lang(fr) /usr/share/man/fr
+%lang(gl) /usr/share/man/gl
+%lang(hr) /usr/share/man/hr
+%lang(hu) /usr/share/man/hu
+%lang(id) /usr/share/man/id
+%lang(it) /usr/share/man/it
+%lang(ja) /usr/share/man/ja
+%lang(ko) /usr/share/man/ko
+%lang(nl) /usr/share/man/nl
+%lang(pl) /usr/share/man/pl
+%lang(pt) /usr/share/man/pt
+%lang(pt_BR) /usr/share/man/pt_BR
+%lang(ro) /usr/share/man/ro
+%lang(ru) /usr/share/man/ru
+%lang(sl) /usr/share/man/sl
+%lang(sk) /usr/share/man/sk
+%lang(sr) /usr/share/man/sr
+%lang(sv) /usr/share/man/sv
+%lang(tr) /usr/share/man/tr
+%lang(uk) /usr/share/man/uk
+%lang(zh_CN) /usr/share/man/zh_CN
+%lang(zh_TW) /usr/share/man/zh_TW
+%dir /usr/share/misc
+%dir /usr/share/tmac
+%dir /usr/src
+%dir /usr/local
+%dir /usr/local/bin
+%dir /usr/local/etc
+%dir /usr/local/games
+%dir /usr/local/include
+%dir /usr/local/lib
+%dir /usr/local/sbin
+%dir /usr/local/share
+%dir /usr/local/share/doc
+%dir /usr/local/share/info
+/usr/local/share/man
 %{_locmandir}
-%{_prefix}/local/src
+%dir /usr/local/src
 %dir /var
-/var/cache
+%dir /var/cache
 %dir /var/crash
 %dir /var/db
 %dir /var/games
@@ -203,16 +180,15 @@ fi
 %dir /var/lib/misc
 %dir /var/local
 %attr(1771,root,uucp) %dir /var/lock
-%attr(700,root,root) %dir /var/lock/subsys
 %attr(751,root,root) /var/log
 %attr(2775,root,mail) /var/mail
 %dir /var/opt
 %dir /var/run
 %dir /var/spool
 %attr(1777,root,root) %dir /var/tmp
-
-%ifarch ppc64 sparc64 x86_64
-/lib64
-%{_prefix}/lib64
-%{_prefix}/local/lib64
+%if "%{_lib}" == "lib64"
+%dir /lib64
+%dir /usr/lib64
+%dir /usr/lib64/games
+%dir /usr/local/lib64
 %endif
