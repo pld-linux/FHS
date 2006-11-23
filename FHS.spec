@@ -6,7 +6,7 @@ Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		FHS
 Version:	2.3
-Release:	16
+Release:	17
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -63,7 +63,7 @@ install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT/usr/share/man/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
-	for mloc in bg cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
+	for mloc in bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
 		    pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
 		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
 	done
@@ -127,6 +127,7 @@ fi
 %dir /usr/share/man
 %dir /usr/share/man/man[1-8]
 %lang(bg) /usr/share/man/bg
+%lang(ca) /usr/share/man/ca
 %lang(cs) /usr/share/man/cs
 %lang(da) /usr/share/man/da
 %lang(de) /usr/share/man/de
