@@ -123,7 +123,6 @@ fi
 %dir /usr/share/doc
 %dir /usr/share/games
 %dir /usr/share/info
-%dir /usr/share
 %dir /usr/share/man
 %dir /usr/share/man/man[1-8]
 %lang(bg) /usr/share/man/bg
