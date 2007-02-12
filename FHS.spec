@@ -1,9 +1,9 @@
 # NOTE: don't use %{_*dir} macros for paths defined by FHS
 Summary:	Basic FHS 2.3 filesystem layout
-Summary(de):	Grundlegende Dateisystemstruktur
-Summary(fr):	Arborescence de base du système de fichiers
-Summary(pl):	Podstawowy uk³ad katalogów systemu Linux zgodny z FHS 2.3
-Summary(tr):	Temel dosya sistemi yapısı
+Summary(de.UTF-8):   Grundlegende Dateisystemstruktur
+Summary(fr.UTF-8):   Arborescence de base du systÃ¨me de fichiers
+Summary(pl.UTF-8):   Podstawowy ukÅ‚ad katalogÃ³w systemu Linux zgodny z FHS 2.3
+Summary(tr.UTF-8):   Temel dosya sistemi yapÄ±sÄ±
 Name:		FHS
 Version:	2.3
 Release:	17
@@ -21,24 +21,24 @@ This package contains the basic directory layout for a Linux system,
 including the proper permissions for the directories. This layout
 conforms to the Filesystem Hierarchy Standard (FHS) 2.3.
 
-%description -l de
-Dieses Paket enthält die grundlegende Verzeichnisstruktur eines
-Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
+%description -l de.UTF-8
+Dieses Paket enthÃ¤lt die grundlegende Verzeichnisstruktur eines
+Linux-Systems, einschlieÃŸlich der entsprechenden Zugriffsrechte. Diese
 Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.3.
 
-%description -l fr
-Ce package contient l'arborescence type pour système Linux y compris
-les permissions adéquates pour les répertoires. Cette arborescence est
+%description -l fr.UTF-8
+Ce package contient l'arborescence type pour systÃ¨me Linux y compris
+les permissions adÃ©quates pour les rÃ©pertoires. Cette arborescence est
 conforme au standard "Filesystem Hierarchy Standard" (FHS) 2.3.
 
-%description -l pl
-Pakiet ten zawiera informacje o podstawowej strukturze katalogów
-systemu i praw dostêpu do nich. Struktura katalogów jest zgodna z FHS
+%description -l pl.UTF-8
+Pakiet ten zawiera informacje o podstawowej strukturze katalogÃ³w
+systemu i praw dostÄ™pu do nich. Struktura katalogÃ³w jest zgodna z FHS
 2.3.
 
-%description -l tr
-Bu paket GNU makro işleme dilini içerir. Mantıksal olarak
-ayrıştırılabilen metin dosyaları yazımı için yararlıdır.
+%description -l tr.UTF-8
+Bu paket GNU makro iÅŸleme dilini iÃ§erir. MantÄ±ksal olarak
+ayrÄ±ÅŸtÄ±rÄ±labilen metin dosyalarÄ± yazÄ±mÄ± iÃ§in yararlÄ±dÄ±r.
 
 %prep
 
