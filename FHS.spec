@@ -1,9 +1,9 @@
 # NOTE: don't use %{_*dir} macros for paths defined by FHS
 Summary:	Basic FHS 2.3 filesystem layout
-Summary(de.UTF-8):   Grundlegende Dateisystemstruktur
-Summary(fr.UTF-8):   Arborescence de base du système de fichiers
-Summary(pl.UTF-8):   Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
-Summary(tr.UTF-8):   Temel dosya sistemi yapısı
+Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
+Summary(fr.UTF-8):	Arborescence de base du système de fichiers
+Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
+Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
 Release:	17
