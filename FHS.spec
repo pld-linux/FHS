@@ -15,6 +15,7 @@ Requires:	setup >= 2.4.6-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
+%define 	no_install_post_strip	1
 
 %description
 This package contains the basic directory layout for a Linux system,
