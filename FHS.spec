@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	17
+Release:	18
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -55,7 +55,7 @@ install -d \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,games,info,misc,tmac,xml} \
 	$RPM_BUILD_ROOT/usr/lib/games \
 	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
-	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,lock,log,mail,opt,run,spool,tmp}
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,lock,log,mail,opt,run,spool,tmp,yp}
 
 %if "%{_lib}" == "lib64"
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
@@ -187,6 +187,7 @@ fi
 %dir /var/opt
 %dir /var/run
 %dir /var/spool
+%dir /var/yp
 %attr(1777,root,root) %dir /var/tmp
 %if "%{_lib}" == "lib64"
 %dir /lib64
