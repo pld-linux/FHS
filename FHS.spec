@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	18
+Release:	19
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -64,8 +64,8 @@ install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT/usr/share/man/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
-	for mloc in bg ca cs da de el es fi fr gl hr hu id it ja ko nl pl pt \
-		    pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
+	for mloc in bg ca cs da de el eo es fi fr gl hr hu id it ja ko nl pl \
+			pt pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
 		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
 	done
 done
@@ -132,6 +132,7 @@ fi
 %lang(da) /usr/share/man/da
 %lang(de) /usr/share/man/de
 %lang(el) /usr/share/man/el
+%lang(eo) /usr/share/man/eo
 %lang(es) /usr/share/man/es
 %lang(fi) /usr/share/man/fi
 %lang(fr) /usr/share/man/fr
