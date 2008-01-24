@@ -1,0 +1,4 @@
+- added %{_xmandir}/sk dir
+- removed %ghost from dirs - it caused problems: rpm -V complained about
+  missing dirs and permissions weren't set correctly during upgrade
+- release 25
