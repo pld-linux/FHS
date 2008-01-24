@@ -15,7 +15,10 @@ Requires:	setup >= 2.4.6-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
+# doesn't contain any files, but we're not noarch package
 %define 	no_install_post_strip	1
+%define 	no_install_post_chrpath	1
+%define 	no_install_post_compress_modules	1
 
 %description
 This package contains the basic directory layout for a Linux system,
