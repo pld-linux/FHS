@@ -1,0 +1,2 @@
+- removed %{_fontsdir}/latin2 directory (to reflect last XFree86-fonts changes)
+- release 8
