@@ -1,0 +1,3 @@
+- added missing dirs, required by FHS 2.2: /usr/local/include, /var/local
+- added %{_mandir}/pl/mann dir (we have some pl man pages for tcl)
+- release 4
