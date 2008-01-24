@@ -1,0 +1,6 @@
+- changed location for cgi programs:
+  %{_libdir}/cgi-bin -> %{_prefix}/lib/cgi-bin .
+  There's no need to have two different directories on
+  different archs (/usr/lib vs. /usr/lib64 issue) - one
+  /usr/lib/cgi-bin is sufficient and good for all archs.
+- rel. 12
