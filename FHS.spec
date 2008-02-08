@@ -1,4 +1,8 @@
-# NOTE: don't use %{_*dir} macros for paths defined by FHS
+# NOTE
+# - don't use %{_*dir} macros for paths defined by FHS
+
+# avoid rpm 4.4.9 adding rm -rf buildroot, we need the dirs to check consistency
+%define		__spec_clean_body	%{nil}
 Summary:	Basic FHS 2.3 filesystem layout
 Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
 Summary(fr.UTF-8):	Arborescence de base du système de fichiers
@@ -10,11 +14,13 @@ Release:	22
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
+BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
 Requires:	setup >= 2.4.6-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_locmandir	/usr/local/man
+
 # doesn't contain any files, but we're not noarch package
 %define 	no_install_post_strip	1
 %define 	no_install_post_chrpath	1
@@ -79,19 +85,23 @@ ln -sf ../man $RPM_BUILD_ROOT/usr/local/share/man
 %clean
 cd $RPM_BUILD_ROOT
 
-# %{_rpmfilename} is not expanded, so use
-# %{name}-%{version}-%{release}.%{buildarch}.rpm
-RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
-TMPFILE=%{name}-%{version}.tmp$$
-find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE > $TMPFILE
+check_filesystem_dirs() {
+	# %{_rpmfilename} is not expanded, so use
+	# %{name}-%{version}-%{release}.%{buildarch}.rpm
+	RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
+	TMPFILE=$(mktemp)
+	find . | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort > $TMPFILE
 
-# find finds also '.', so use option -B for diff
-if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - ; then
-	rm -rf $RPM_BUILD_ROOT
-else
-	echo -e "\nNot so good, some directories are not included in package\n"
-	exit 1;
-fi
+	# find finds also '.', so use option -B for diff
+	if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | LC_ALL=C sort | diff -uB $TMPFILE - ; then
+		rm -rf $RPM_BUILD_ROOT
+	else
+		echo -e "\nNot so good, some directories are not included in package\n"
+		exit 1
+	fi
+	rm -f $TMPFILE
+}
+check_filesystem_dirs
 
 %files
 %defattr(644,root,root,755)
