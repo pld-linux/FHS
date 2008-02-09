@@ -86,11 +86,9 @@ ln -sf ../man $RPM_BUILD_ROOT/usr/local/share/man
 cd $RPM_BUILD_ROOT
 
 check_filesystem_dirs() {
-	# %{_rpmfilename} is not expanded, so use
-	# %{name}-%{version}-%{release}.%{buildarch}.rpm
 	RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
 	TMPFILE=$(mktemp)
-	find . | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort > $TMPFILE
+	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort > $TMPFILE
 
 	# find finds also '.', so use option -B for diff
 	if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | LC_ALL=C sort | diff -uB $TMPFILE - ; then
