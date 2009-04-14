@@ -1,8 +1,6 @@
 # NOTE
 # - don't use %{_*dir} macros for paths defined by FHS
 
-# avoid rpm 4.4.9 adding rm -rf buildroot, we need the dirs to check consistency
-%define		__spec_clean_body	%{nil}
 Summary:	Basic FHS 2.3 filesystem layout
 Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
 Summary(fr.UTF-8):	Arborescence de base du système de fichiers
@@ -18,6 +16,12 @@ BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
 Requires:	setup >= 2.4.6-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# nothing to put there
+%define		_enable_debug_packages	0
+
+# avoid rpm 4.4.9 adding rm -rf buildroot, we need the dirs to check consistency
+%define		__spec_clean_body	%{nil}
 
 %define		_locmandir	/usr/local/man
 
