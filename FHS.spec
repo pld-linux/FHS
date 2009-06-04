@@ -1,6 +1,7 @@
 # NOTE
 # - don't use %{_*dir} macros for paths defined by FHS
-
+# - do not add any dependencies to this pkg, FHS should be the first package being installed
+# - do not use any other user/group than "root", as then we have to depend on "setup" package.
 Summary:	Basic FHS 2.3 filesystem layout
 Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
 Summary(fr.UTF-8):	Arborescence de base du système de fichiers
@@ -8,13 +9,13 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	24
+Release:	25
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
 BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
-Requires:	setup >= 2.4.6-4
+Conflicts:	setup < 2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # nothing to put there
@@ -29,6 +30,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	no_install_post_strip	1
 %define 	no_install_post_chrpath	1
 %define 	no_install_post_compress_modules	1
+
+# we have to use numeric uids/groups. see comment above
+
+%define		gid_uucp	14
+%define		gid_mail	12
 
 %description
 This package contains the basic directory layout for a Linux system,
@@ -105,6 +111,11 @@ check_filesystem_dirs() {
 }
 check_filesystem_dirs
 
+# XXX: it is 2009, what uucp?! but we use /var/lock/subsys, so change it just to root?
+%post -p <lua>
+posix.chown("/var/mail", 0, %{gid_mail})
+posix.chown("/var/lock", 0, %{gid_uucp})
+
 %files
 %defattr(644,root,root,755)
 %dir /
@@ -117,12 +128,12 @@ check_filesystem_dirs
 %dir /home
 %dir /lib
 %dir /lib/modules
-%attr(775,root,disk) %dir /media
-%attr(775,root,disk) /media/floppy
-%attr(775,root,disk) /media/cdrom
+%attr(775,root,root) %dir /media
+%attr(775,root,root) %verify(not group) /media/floppy
+%attr(775,root,root) %verify(not group) /media/cdrom
 %dir /mnt
 %dir /opt
-%attr(555,root,proc) %verify(not group) /proc
+%attr(555,root,root) %verify(not group) /proc
 %attr(700,root,root) /root
 %dir /sbin
 %attr(755,root,root) /srv
@@ -198,9 +209,9 @@ check_filesystem_dirs
 %dir /var/lib
 %dir /var/lib/misc
 %dir /var/local
-%attr(1771,root,uucp) %dir /var/lock
+%attr(1771,root,root) %dir /var/lock
 %attr(751,root,root) /var/log
-%attr(2775,root,mail) /var/mail
+%attr(2775,root,root) /var/mail
 %dir /var/opt
 %dir /var/run
 %dir /var/spool
