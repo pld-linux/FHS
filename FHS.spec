@@ -128,16 +128,16 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /home
 %dir /lib
 %dir /lib/modules
-%attr(775,root,root) %dir /media
-%attr(775,root,root) %verify(not group) /media/floppy
-%attr(775,root,root) %verify(not group) /media/cdrom
+%dir %attr(775,root,root) /media
+%dir %attr(775,root,root) %verify(not group) /media/floppy
+%dir %attr(775,root,root) %verify(not group) /media/cdrom
 %dir /mnt
 %dir /opt
-%attr(555,root,root) %verify(not group) /proc
-%attr(700,root,root) /root
+%dir %attr(555,root,root) %verify(not group) /proc
+%dir %attr(700,root,root) /root
 %dir /sbin
-%attr(755,root,root) /srv
-%attr(1777,root,root) /tmp
+%dir %attr(755,root,root) /srv
+%dir %attr(1777,root,root) /tmp
 %dir /usr
 %dir /usr/bin
 %dir /usr/games
@@ -209,14 +209,14 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /var/lib
 %dir /var/lib/misc
 %dir /var/local
-%attr(1771,root,root) %dir /var/lock
-%attr(751,root,root) /var/log
-%attr(2775,root,root) /var/mail
+%dir %attr(1771,root,root) /var/lock
+%dir %attr(751,root,root) /var/log
+%dir %attr(2775,root,root) /var/mail
 %dir /var/opt
 %dir /var/run
 %dir /var/spool
 %dir /var/yp
-%attr(1777,root,root) %dir /var/tmp
+%dir %attr(1777,root,root) /var/tmp
 %if "%{_lib}" == "lib64"
 %dir /lib64
 %dir /usr/lib64
