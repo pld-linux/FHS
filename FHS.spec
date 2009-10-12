@@ -13,6 +13,7 @@ Release:	26
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
+Source0:	locale-dirs
 BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
 Conflicts:	setup < 2.7
@@ -61,6 +62,8 @@ Bu paket GNU makro işleme dilini içerir. Mantıksal olarak
 ayrıştırılabilen metin dosyaları yazımı için yararlıdır.
 
 %prep
+%setup -qc
+cp -a %{SOURCE0} .
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -83,8 +86,7 @@ install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
 for manp in man{1,2,3,4,5,6,7,8} ; do
 	install -d $RPM_BUILD_ROOT/usr/share/man/${manp}
 	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
-	for mloc in bg ca cs da de el eo es fi fr gl hr hu id it ja ko lt nl \
-			pl pt pt_BR ro ru sk sl sr sv tr uk zh_CN zh_TW ; do
+	for mloc in $(cat locale-dirs); do
 		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
 	done
 done
