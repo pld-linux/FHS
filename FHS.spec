@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	26
+Release:	27
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
