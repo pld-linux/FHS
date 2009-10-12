@@ -62,7 +62,7 @@ Bu paket GNU makro işleme dilini içerir. Mantıksal olarak
 ayrıştırılabilen metin dosyaları yazımı için yararlıdır.
 
 %prep
-%setup -qc
+%setup -qcT
 cp -a %{SOURCE0} .
 
 %install
