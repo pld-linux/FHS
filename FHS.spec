@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	27
+Release:	28
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -83,16 +83,20 @@ install -d \
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
 %endif
 
-for manp in man{1,2,3,4,5,6,7,8} ; do
-	install -d $RPM_BUILD_ROOT/usr/share/man/${manp}
-	install -d $RPM_BUILD_ROOT%{_locmandir}/${manp}
-	for mloc in $(cat locale-dirs); do
-		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
-	done
-done
+install -d $RPM_BUILD_ROOT/usr/share/man/man{1,2,3,4,5,6,7,8}
+install -d $RPM_BUILD_ROOT%{_locmandir}/man{1,2,3,4,5,6,7,8}
 
 # "/usr/local/share/man and /usr/local/man must be synonomous" per FHS 2.3
 ln -sf ../man $RPM_BUILD_ROOT/usr/local/share/man
+
+> %{name}.lang
+for mloc in $(cat locale-dirs); do
+	echo "%%lang($mloc) %dir /usr/share/man/${mloc}" >> %{name}.lang
+	for manp in man{1,2,3,4,5,6,7,8}; do
+		install -d $RPM_BUILD_ROOT/usr/share/man/${mloc}/${manp}
+		echo "%%lang($mloc) %dir /usr/share/man/${mloc}/${manp}" >> %{name}.lang
+	done
+done
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -118,7 +122,7 @@ check_filesystem_dirs
 posix.chown("/var/mail", 0, %{gid_mail})
 posix.chown("/var/lock", 0, %{gid_uucp})
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %dir /
 %dir /bin
@@ -155,38 +159,6 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/share/info
 %dir /usr/share/man
 %dir /usr/share/man/man[1-8]
-%lang(bg) /usr/share/man/bg
-%lang(ca) /usr/share/man/ca
-%lang(cs) /usr/share/man/cs
-%lang(da) /usr/share/man/da
-%lang(de) /usr/share/man/de
-%lang(el) /usr/share/man/el
-%lang(eo) /usr/share/man/eo
-%lang(es) /usr/share/man/es
-%lang(fi) /usr/share/man/fi
-%lang(fr) /usr/share/man/fr
-%lang(gl) /usr/share/man/gl
-%lang(hr) /usr/share/man/hr
-%lang(hu) /usr/share/man/hu
-%lang(id) /usr/share/man/id
-%lang(it) /usr/share/man/it
-%lang(ja) /usr/share/man/ja
-%lang(ko) /usr/share/man/ko
-%lang(lt) /usr/share/man/lt
-%lang(nl) /usr/share/man/nl
-%lang(pl) /usr/share/man/pl
-%lang(pt) /usr/share/man/pt
-%lang(pt_BR) /usr/share/man/pt_BR
-%lang(ro) /usr/share/man/ro
-%lang(ru) /usr/share/man/ru
-%lang(sl) /usr/share/man/sl
-%lang(sk) /usr/share/man/sk
-%lang(sr) /usr/share/man/sr
-%lang(sv) /usr/share/man/sv
-%lang(tr) /usr/share/man/tr
-%lang(uk) /usr/share/man/uk
-%lang(zh_CN) /usr/share/man/zh_CN
-%lang(zh_TW) /usr/share/man/zh_TW
 %dir /usr/share/misc
 %dir /usr/share/tmac
 %dir /usr/share/xml
