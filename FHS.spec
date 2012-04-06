@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	34
+Release:	35
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -72,7 +72,7 @@ install -d \
 	$RPM_BUILD_ROOT/{bin,boot,dev,etc,home,opt,srv} \
 	$RPM_BUILD_ROOT/etc/{X11,opt} \
 	$RPM_BUILD_ROOT/lib/modules \
-	$RPM_BUILD_ROOT/{mnt,media/{cdrom,floppy},proc,root/tmp,sbin,tmp} \
+	$RPM_BUILD_ROOT/{mnt,media,proc,root/tmp,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,games,include,lib,sbin,share,src} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,games,info,misc,tmac,xml} \
 	$RPM_BUILD_ROOT/usr/lib/games \
@@ -134,9 +134,7 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /home
 %dir /lib
 %dir /lib/modules
-%dir %attr(775,root,root) /media
-%dir %attr(775,root,root) %verify(not group) /media/floppy
-%dir %attr(775,root,root) %verify(not group) /media/cdrom
+%dir /media
 %dir /mnt
 %dir /opt
 %dir %attr(555,root,root) %verify(not group) /proc
