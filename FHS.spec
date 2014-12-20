@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	35
+Release:	36
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -81,6 +81,13 @@ install -d \
 
 %if "%{_lib}" == "lib64"
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
+%ifarch %{x8664}
+install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
+%endif
+%endif
+
+%if "%{_lib}" == "libx32"
+install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
 %endif
 
 install -d $RPM_BUILD_ROOT/usr/share/man/man{1,2,3,4,5,6,7,8}
@@ -195,4 +202,16 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/lib64
 %dir /usr/lib64/games
 %dir /usr/local/lib64
+%ifarch %{x8664}
+%dir /libx32
+%dir /usr/libx32
+%dir /usr/libx32/games
+%dir /usr/local/libx32
+%endif
+%endif
+%if "%{_lib}" == "libx32"
+%dir /libx32
+%dir /usr/libx32
+%dir /usr/libx32/games
+%dir /usr/local/libx32
 %endif
