@@ -22,6 +22,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # nothing to put there
 %define		_enable_debug_packages	0
 
+%if "%{_lib}" == "lib64"
+%define		with_lib64	1
+%else
+%define		with_lib64	0
+%endif
+%if "%{_lib}" == "libx32"
+%define		with_libx32	1
+%else
+%ifarch %{x8664}
+# x32 as additional ABI
+%define		with_libx32	1
+%endif
+%endif
+
 # avoid rpm 4.4.9 adding rm -rf buildroot, we need the dirs to check consistency
 %define		__spec_clean_body	%{nil}
 
@@ -79,14 +93,10 @@ install -d \
 	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,lock,log,mail,opt,run,spool,tmp,yp}
 
-%if "%{_lib}" == "lib64"
+%if %{with lib64}
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
-%ifarch %{x8664}
-install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
 %endif
-%endif
-
-%if "%{_lib}" == "libx32"
+%if %{with libx32}
 install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
 %endif
 
@@ -197,19 +207,13 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /var/spool
 %dir /var/yp
 %dir %attr(1777,root,root) /var/tmp
-%if "%{_lib}" == "lib64"
+%if %{with lib64}
 %dir /lib64
 %dir /usr/lib64
 %dir /usr/lib64/games
 %dir /usr/local/lib64
-%ifarch %{x8664}
-%dir /libx32
-%dir /usr/libx32
-%dir /usr/libx32/games
-%dir /usr/local/libx32
 %endif
-%endif
-%if "%{_lib}" == "libx32"
+%if %{with libx32}
 %dir /libx32
 %dir /usr/libx32
 %dir /usr/libx32/games
