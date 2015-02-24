@@ -71,10 +71,6 @@ Pakiet ten zawiera informacje o podstawowej strukturze katalogów
 systemu i praw dostępu do nich. Struktura katalogów jest zgodna z FHS
 2.3.
 
-%description -l tr.UTF-8
-Bu paket GNU makro işleme dilini içerir. Mantıksal olarak
-ayrıştırılabilen metin dosyaları yazımı için yararlıdır.
-
 %prep
 %setup -qcT
 cp -a %{SOURCE0} .
