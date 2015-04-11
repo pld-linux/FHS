@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	2.3
-Release:	38
+Release:	39
 License:	GPL
 Group:		Base
 URL:		http://www.pathname.com/fhs/
@@ -27,6 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 %if "%{_lib}" == "libx32"
 %define		with_libx32	1
+%define		with_lib64	1
 %else
 %ifarch %{x8664}
 # x32 as additional ABI
