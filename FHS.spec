@@ -16,7 +16,7 @@ Version:	2.3
 Release:	39
 License:	GPL
 Group:		Base
-URL:		http://www.pathname.com/fhs/
+URL:		http://refspecs.linuxfoundation.org/fhs.shtml
 Source0:	locale-dirs
 BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
