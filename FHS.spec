@@ -1,3 +1,7 @@
+# TODO
+# - revise and update to 3.0:
+#  - https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
+#  - http://www.linuxfoundation.org/collaborate/workgroups/lsb/fhs
 # NOTE
 # - don't use %{_*dir} macros for paths defined by FHS
 # - do not add any dependencies to this pkg, FHS should be the first package being installed
