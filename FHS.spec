@@ -1,5 +1,3 @@
-# TODO
-# - provide -doc-text, -doc-pdf, -doc-html as offline reference for the spec
 # NOTE
 # - don't use %{_*dir} macros for paths defined by FHS
 # - do not add any dependencies to this pkg, FHS should be the first package being installed
@@ -76,7 +74,7 @@ systemu i praw dostępu do nich. Struktura katalogów jest zgodna z FHS
 
 %prep
 %setup -qcT
-cp -a %{SOURCE0} .
+cp -p %{SOURCE0} .
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -90,7 +88,7 @@ install -d \
 	$RPM_BUILD_ROOT/usr/share/{color/icc,dict,doc,games,info,misc,ppd,tmac,xml} \
 	$RPM_BUILD_ROOT/usr/lib/games \
 	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{color/icc,doc,info,man},src} \
-	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/{color,misc},local,lock,log,mail,opt,run,spool,tmp,yp}
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/{color/icc,misc},local,lock,log,mail,opt,run,spool,tmp,yp}
 
 %if %{with lib64}
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
@@ -131,10 +129,13 @@ check_filesystem_dirs() {
 check_filesystem_dirs
 
 %pretrans -p <lua>
-if posix.stat("/usr/local/share/man", "type") == "link" then os.remove("/usr/local/share/man") end
+st = posix.stat("/usr/local/share/man")
+if st and st.type == "link" then
+    os.remove("/usr/local/share/man")
+end
 
-# XXX: it is 2009, what uucp?! but we use /var/lock/subsys, so change it just to root?
 %post -p <lua>
+--# XXX: it is 2009, what uucp?! but we use /var/lock/subsys, so change it just to root?
 posix.chown("/var/mail", 0, %{gid_mail})
 posix.chown("/var/lock", 0, %{gid_uucp})
 
