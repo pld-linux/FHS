@@ -1,23 +1,24 @@
 # TODO
-# - revise and update to 3.0:
-#  - https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
-#  - http://www.linuxfoundation.org/collaborate/workgroups/lsb/fhs
 # - provide -doc-text, -doc-pdf, -doc-html as offline reference for the spec
 # NOTE
 # - don't use %{_*dir} macros for paths defined by FHS
 # - do not add any dependencies to this pkg, FHS should be the first package being installed
 # - do not use any other user/group than "root", as then we have to depend on "setup" package.
-Summary:	Basic FHS 2.3 filesystem layout
+#   But: root %attr+chown in %post means integrity verification (rpm -V) error.
+#   Maybe use non-root %attr+numeric chown in %post (without setup dependency)? The only disadvantage
+#   seems to be a warning message on install.
+Summary:	Basic FHS %{version} filesystem layout
 Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
 Summary(fr.UTF-8):	Arborescence de base du système de fichiers
-Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 2.3
+Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS %{version}
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
-Version:	2.3
-Release:	39
+Version:	3.0
+Release:	1
 License:	GPL
 Group:		Base
 URL:		http://refspecs.linuxfoundation.org/fhs.shtml
+# list of languages for localized man pages directories
 Source0:	locale-dirs
 BuildRequires:	mktemp
 BuildRequires:	rpmbuild(macros) >= 1.213
@@ -43,8 +44,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # avoid rpm 4.4.9 adding rm -rf buildroot, we need the dirs to check consistency
 %define		__spec_clean_body	%{nil}
 
-%define		_locmandir	/usr/local/man
-
 # doesn't contain any files, but we're not noarch package
 %define 	no_install_post_strip	1
 %define 	no_install_post_chrpath	1
@@ -58,22 +57,22 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This package contains the basic directory layout for a Linux system,
 including the proper permissions for the directories. This layout
-conforms to the Filesystem Hierarchy Standard (FHS) 2.3.
+conforms to the Filesystem Hierarchy Standard (FHS) %{version}.
 
 %description -l de.UTF-8
 Dieses Paket enthält die grundlegende Verzeichnisstruktur eines
 Linux-Systems, einschließlich der entsprechenden Zugriffsrechte. Diese
-Struktur entspricht dem Filesystem Hierarchy Standard (FHS) 2.3.
+Struktur entspricht dem Filesystem Hierarchy Standard (FHS) %{version}.
 
 %description -l fr.UTF-8
 Ce package contient l'arborescence type pour système Linux y compris
 les permissions adéquates pour les répertoires. Cette arborescence est
-conforme au standard "Filesystem Hierarchy Standard" (FHS) 2.3.
+conforme au standard "Filesystem Hierarchy Standard" (FHS) %{version}.
 
 %description -l pl.UTF-8
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów
 systemu i praw dostępu do nich. Struktura katalogów jest zgodna z FHS
-2.3.
+%{version}.
 
 %prep
 %setup -qcT
@@ -83,15 +82,15 @@ cp -a %{SOURCE0} .
 rm -rf $RPM_BUILD_ROOT
 
 install -d \
-	$RPM_BUILD_ROOT/{bin,boot,dev,etc,home,opt,srv} \
+	$RPM_BUILD_ROOT/{bin,boot,dev,etc,home,opt,run,srv,sys} \
 	$RPM_BUILD_ROOT/etc/{X11,opt} \
 	$RPM_BUILD_ROOT/lib/modules \
 	$RPM_BUILD_ROOT/{mnt,media,proc,root/tmp,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,games,include,lib,sbin,share,src} \
-	$RPM_BUILD_ROOT/usr/share/{dict,doc,games,info,misc,tmac,xml} \
+	$RPM_BUILD_ROOT/usr/share/{color/icc,dict,doc,games,info,misc,ppd,tmac,xml} \
 	$RPM_BUILD_ROOT/usr/lib/games \
-	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{doc,info},src} \
-	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/misc,local,lock,log,mail,opt,run,spool,tmp,yp}
+	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,sbin,share/{color/icc,doc,info,man},src} \
+	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/{color,misc},local,lock,log,mail,opt,run,spool,tmp,yp}
 
 %if %{with lib64}
 install -d $RPM_BUILD_ROOT{/lib64,/usr/lib64/games,/usr/local/lib64}
@@ -101,10 +100,7 @@ install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
 %endif
 
 install -d $RPM_BUILD_ROOT/usr/share/man/man{1,2,3,4,5,6,7,8}
-install -d $RPM_BUILD_ROOT%{_locmandir}/man{1,2,3,4,5,6,7,8}
-
-# "/usr/local/share/man and /usr/local/man must be synonomous" per FHS 2.3
-ln -sf ../man $RPM_BUILD_ROOT/usr/local/share/man
+install -d $RPM_BUILD_ROOT/usr/local/share/man/man{1,2,3,4,5,6,7,8}
 
 > %{name}.lang
 for mloc in $(cat locale-dirs); do
@@ -134,6 +130,9 @@ check_filesystem_dirs() {
 }
 check_filesystem_dirs
 
+%pretrans -p <lua>
+if posix.stat("/usr/local/share/man", "type") == "link" then os.remove("/usr/local/share/man") end
+
 # XXX: it is 2009, what uucp?! but we use /var/lock/subsys, so change it just to root?
 %post -p <lua>
 posix.chown("/var/mail", 0, %{gid_mail})
@@ -157,8 +156,10 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir %attr(555,root,root) %verify(not group) /proc
 %dir %attr(700,root,root) /root
 %dir %attr(700,root,root) /root/tmp
+%dir /run
 %dir /sbin
 %dir %attr(755,root,root) /srv
+%dir /sys
 %dir %attr(1777,root,root) /tmp
 %dir /usr
 %dir /usr/bin
@@ -168,6 +169,8 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/lib/games
 %dir /usr/sbin
 %dir /usr/share
+%dir /usr/share/color
+%dir /usr/share/color/icc
 %dir /usr/share/dict
 %dir /usr/share/doc
 %dir /usr/share/games
@@ -175,6 +178,7 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/share/man
 %dir /usr/share/man/man[1-8]
 %dir /usr/share/misc
+%dir /usr/share/ppd
 %dir /usr/share/tmac
 %dir /usr/share/xml
 %dir /usr/src
@@ -186,10 +190,12 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/local/lib
 %dir /usr/local/sbin
 %dir /usr/local/share
+%dir /usr/local/share/color
+%dir /usr/local/share/color/icc
 %dir /usr/local/share/doc
 %dir /usr/local/share/info
-/usr/local/share/man
-%{_locmandir}
+%dir /usr/local/share/man
+%dir /usr/local/share/man/man[1-8]
 %dir /usr/local/src
 %dir /var
 %dir /var/cache
@@ -197,6 +203,8 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /var/db
 %dir /var/games
 %dir /var/lib
+%dir /var/lib/color
+%dir /var/lib/color/icc
 %dir /var/lib/misc
 %dir /var/local
 %dir %attr(1771,root,root) /var/lock
