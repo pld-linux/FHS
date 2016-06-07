@@ -48,7 +48,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	no_install_post_compress_modules	1
 
 # we have to use numeric uids/groups. see comment above
-
 %define		gid_uucp	14
 %define		gid_mail	12
 
@@ -115,10 +114,9 @@ cd $RPM_BUILD_ROOT
 check_filesystem_dirs() {
 	RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
 	TMPFILE=$(mktemp)
-	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort > $TMPFILE
+	find | sed -e 's|^\.||g' -e '/^$/d' | LC_ALL=C sort > $TMPFILE
 
-	# find finds also '.', so use option -B for diff
-	if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | LC_ALL=C sort | diff -uB $TMPFILE - ; then
+	if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | LC_ALL=C sort | diff -u $TMPFILE - ; then
 		rm -rf $RPM_BUILD_ROOT
 	else
 		echo -e "\nNot so good, some directories are not included in package\n"
