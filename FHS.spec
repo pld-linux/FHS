@@ -5,10 +5,10 @@
 #   But: root %attr+chown in %post means integrity verification (rpm -V) error.
 #   Maybe use non-root %attr+numeric chown in %post (without setup dependency)? The only disadvantage
 #   seems to be a warning message on install.
-Summary:	Basic FHS %{version} filesystem layout
+Summary:	Basic FHS 3.0 filesystem layout
 Summary(de.UTF-8):	Grundlegende Dateisystemstruktur
 Summary(fr.UTF-8):	Arborescence de base du système de fichiers
-Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS %{version}
+Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 3.0
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	3.0
