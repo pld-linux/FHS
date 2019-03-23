@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 3.0
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	3.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 URL:		http://refspecs.linuxfoundation.org/fhs.shtml
@@ -83,10 +83,10 @@ install -d \
 	$RPM_BUILD_ROOT/etc/{X11,opt} \
 	$RPM_BUILD_ROOT/lib/modules \
 	$RPM_BUILD_ROOT/{mnt,media,proc,root/tmp,sbin,tmp} \
-	$RPM_BUILD_ROOT/usr/{bin,games,include,lib{,exec},sbin,share,src} \
+	$RPM_BUILD_ROOT/usr/{bin,games,include,lib,libexec,sbin,share,src} \
 	$RPM_BUILD_ROOT/usr/share/{color/icc,dict,doc,games,info,misc,ppd,tmac,xml} \
 	$RPM_BUILD_ROOT/usr/lib/games \
-	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib{,exec},sbin,share/{color/icc,doc,info,man},src} \
+	$RPM_BUILD_ROOT/usr/local/{bin,etc,games,include,lib,libexec,sbin,share/{color/icc,doc,info,man},src} \
 	$RPM_BUILD_ROOT/var/{cache,crash,db,games,lib/{color/icc,misc},local,lock,log,mail,opt,run,spool,tmp,yp}
 
 %if %{with lib64}
