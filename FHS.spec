@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 3.0
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	3.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 URL:		http://refspecs.linuxfoundation.org/fhs.shtml
