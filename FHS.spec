@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Podstawowy układ katalogów systemu Linux zgodny z FHS 3.0
 Summary(tr.UTF-8):	Temel dosya sistemi yapısı
 Name:		FHS
 Version:	3.0
-Release:	5
+Release:	6
 License:	GPL
 Group:		Base
 URL:		http://refspecs.linuxfoundation.org/fhs.shtml
@@ -43,9 +43,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		__spec_clean_body	%{nil}
 
 # doesn't contain any files, but we're not noarch package
-%define 	no_install_post_strip	1
-%define 	no_install_post_chrpath	1
-%define 	no_install_post_compress_modules	1
+%define		no_install_post_strip	1
+%define		no_install_post_chrpath	1
+%define		no_install_post_compress_modules	1
 
 # we have to use numeric uids/groups. see comment above
 %define		gid_uucp	14
@@ -70,6 +70,14 @@ conforme au standard "Filesystem Hierarchy Standard" (FHS) %{version}.
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów
 systemu i praw dostępu do nich. Struktura katalogów jest zgodna z FHS
 %{version}.
+
+%package debug
+Summary:	Debug information directory hierarchy
+Group:		Development/Debug
+
+%description debug
+This package provides directory hierarchy for debug information
+contained in debuginfo rpm packages.
 
 %prep
 %setup -qcT
@@ -98,6 +106,10 @@ install -d $RPM_BUILD_ROOT{/libx32,/usr/libx32/games,/usr/local/libx32}
 
 install -d $RPM_BUILD_ROOT/usr/share/man/man{1,2,3,4,5,6,7,8}
 install -d $RPM_BUILD_ROOT/usr/local/share/man/man{1,2,3,4,5,6,7,8}
+
+for i in $(seq 0 255); do
+	install -d "$RPM_BUILD_ROOT$(printf '/usr/lib/.build-id/%02x' $i)"
+done
 
 > %{name}.lang
 for mloc in $(cat locale-dirs); do
@@ -228,3 +240,8 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %dir /usr/libx32/games
 %dir /usr/local/libx32
 %endif
+
+%files debug
+%defattr(644,root,root,755)
+%dir /usr/lib/.build-id
+%dir /usr/lib/.build-id/[0-9af][0-9af]
