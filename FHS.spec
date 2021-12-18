@@ -124,11 +124,11 @@ done
 cd $RPM_BUILD_ROOT
 
 check_filesystem_dirs() {
-	RPMFILES="%{name}-%{version}-%{release}.%{_target_cpu}.rpm %{name}-debug-%{version}-%{release}.%{_target_cpu}.rpm"
+	RPMFILES="%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm %{_rpmdir}/%{name}-debug-%{version}-%{release}.%{_target_cpu}.rpm"
 	TMPFILE=$(mktemp)
 	find | sed -e 's|^\.||g' -e '/^$/d' | LC_ALL=C sort > $TMPFILE
 
-	if rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | LC_ALL=C sort | diff -u $TMPFILE - ; then
+	if rpm -qpl $RPMFILES | grep -v '^/$' | LC_ALL=C sort | diff -u $TMPFILE - ; then
 		rm -rf $RPM_BUILD_ROOT
 	else
 		echo -e "\nNot so good, some directories are not included in package\n"
