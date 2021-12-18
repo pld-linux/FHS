@@ -124,7 +124,7 @@ done
 cd $RPM_BUILD_ROOT
 
 check_filesystem_dirs() {
-	RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
+	RPMFILES="%{name}-%{version}-%{release}.%{_target_cpu}.rpm %{name}-debug-%{version}-%{release}.%{_target_cpu}.rpm"
 	TMPFILE=$(mktemp)
 	find | sed -e 's|^\.||g' -e '/^$/d' | LC_ALL=C sort > $TMPFILE
 
