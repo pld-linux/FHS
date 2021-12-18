@@ -244,4 +244,4 @@ posix.chown("/var/lock", 0, %{gid_uucp})
 %files debug
 %defattr(644,root,root,755)
 %dir /usr/lib/.build-id
-%dir /usr/lib/.build-id/[0-9af][0-9af]
+%dir /usr/lib/.build-id/[0-9a-f][0-9a-f]
