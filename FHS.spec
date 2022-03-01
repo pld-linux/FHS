@@ -73,11 +73,16 @@ systemu i praw dostępu do nich. Struktura katalogów jest zgodna z FHS
 
 %package debug
 Summary:	Debug information directory hierarchy
+Summary(pl.UTF-8):	Hierarchia katalogów dla informacji diagnostycznych
 Group:		Development/Debug
 
 %description debug
 This package provides directory hierarchy for debug information
 contained in debuginfo rpm packages.
+
+%description debug -l pl.UTF-8
+Ten pakiet dostarcza hierarchię katalogów dla zawarych w pakietach
+RPM debuginfo informacji pozwalających na śledzenie programów.
 
 %prep
 %setup -qcT
